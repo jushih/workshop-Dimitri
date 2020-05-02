@@ -35,6 +35,8 @@ local function onload(inst)
     else
         onbecamehuman(inst)
     end
+	
+	
 end
 
 
@@ -64,8 +66,37 @@ local master_postinit = function(inst)
 	-- Hunger rate (optional)
 	inst.components.hunger.hungerrate = 1 * TUNING.WILSON_HUNGER_RATE
 	
-	inst.OnLoad = onload
-    inst.OnNewSpawn = onload
+	
+	-- No sanity gain or penalty from food --------------------
+	
+	local old_Eat = inst.components.eater.Eat
+	inst.components.eater.Eat =  function(self, food)
+	-- Make a local variable holding the edible component of the food (optimization).
+	local edible_comp = food.components.edible
+	
+	if edible_comp then 
+		-- save original food value to reset later
+		edible_comp.originalsanityvalue = edible_comp.sanityvalue
+		-- change sanity value to zero
+		edible_comp.sanityvalue = 0
+	end
+	
+		-- Call the original Eat function and save the result in a variable.
+	local returnvalue = old_Eat(self, food)
+		
+	-- If the food is still valid (meaning it has not been destroyed
+	-- because it was the last in the stack), and the edible component is still accessible...
+	if food:IsValid() then
+		-- We reset the food values after eating it.
+		edible_comp.sanityvalue = edible_comp.originalsanityvalue
+		edible_comp.originalsanityvalue = nil
+	end
+	
+	-- Then we return the value returned by the original Eat function.
+	return returnvalue
+	end
+	
+	--------------------------------------------------------
 	
 	-- start with cape equipped
 	inst.OnNewSpawn = function()
@@ -76,9 +107,12 @@ local master_postinit = function(inst)
 	local areadbhar = SpawnPrefab("areadbhar") 
 	inst.components.inventory:Equip(areadbhar)
 	
+	inst.OnLoad = onload
+    inst.OnNewSpawn = onload
+	
 end
 	
-	
+
 end
 
 return MakePlayerCharacter("dimitri", prefabs, assets, common_postinit, master_postinit, start_inv)
