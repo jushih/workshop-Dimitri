@@ -12,7 +12,6 @@ local start_inv = {
 	"flint",
 	"twigs",
 	"twigs",
-	"dimitricape"
 }
 
 -- When the character is revived from human
@@ -48,8 +47,9 @@ end
 -- This initializes for the server only. Components are added here.
 local master_postinit = function(inst)
 	-- choose which sounds this character will play
-	inst.soundsname = "willow"
+	inst.soundsname = "wilson"
 	
+
 	-- Uncomment if "wathgrithr"(Wigfrid) or "webber" voice is used
     --inst.talker_path_override = "dontstarve_DLC001/characters/"
 	
@@ -66,6 +66,18 @@ local master_postinit = function(inst)
 	
 	inst.OnLoad = onload
     inst.OnNewSpawn = onload
+	
+	-- start with cape equipped
+	inst.OnNewSpawn = function()
+	
+	local dimitricape = SpawnPrefab("dimitricape") 
+	inst.components.inventory:Equip(dimitricape)
+	
+	local areadbhar = SpawnPrefab("areadbhar") 
+	inst.components.inventory:Equip(areadbhar)
+	
+end
+	
 	
 end
 
