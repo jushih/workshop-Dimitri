@@ -47,18 +47,18 @@ local require = GLOBAL.require
 local STRINGS = GLOBAL.STRINGS
 
 -- The character select screen lines
-STRINGS.CHARACTER_TITLES.dimitri = "The Sample Character"
-STRINGS.CHARACTER_NAMES.dimitri = "Esc"
-STRINGS.CHARACTER_DESCRIPTIONS.dimitri = "*Perk 1\n*Perk 2\n*Perk 3"
-STRINGS.CHARACTER_QUOTES.dimitri = "\"Quote\""
+STRINGS.CHARACTER_TITLES.dimitri = "The Tempest King"
+STRINGS.CHARACTER_NAMES.dimitri = "Dimitri"
+STRINGS.CHARACTER_DESCRIPTIONS.dimitri = "Crest of Blaiddyd grants him strength.*\n*Breaks things easily.\n*Lacks a sense of taste."
+STRINGS.CHARACTER_QUOTES.dimitri = "\"The dead demand justice.\""
 
 
 -- Custom speech strings
 STRINGS.CHARACTERS.DIMITRI = require "speech_dimitri"
 
 -- The character's name as appears in-game 
-STRINGS.NAMES.DIMITRI = "Esc"
-STRINGS.SKIN_NAMES.dimitri_none = "Esc"
+STRINGS.NAMES.DIMITRI = "Dimitri"
+STRINGS.SKIN_NAMES.dimitri_none = "Dimitri"
 
 -- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.
 AddModCharacter("dimitri", "MALE")
@@ -66,5 +66,8 @@ AddModCharacter("dimitri", "MALE")
 
 -- item names 
 STRINGS.NAMES.AREADBHAR = "Areadbhar"
+STRINGS.NAMES.DIMITRICAPE = "Dimitri's Cape"
 
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.AREADBHAR = "A lance carved out of bone."
+-- descriptions
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.AREADBHAR = "A jagged lance carved out of bone."
+STRINGS.CHARACTERS.DIMITRI.DESCRIBE.AREADBHAR = "With this I shall avenge the fallen."
