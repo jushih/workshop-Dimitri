@@ -49,7 +49,7 @@ local STRINGS = GLOBAL.STRINGS
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.dimitri = "The Tempest King"
 STRINGS.CHARACTER_NAMES.dimitri = "Dimitri"
-STRINGS.CHARACTER_DESCRIPTIONS.dimitri = "Crest of Blaiddyd grants him strength.*\n*Breaks things easily.\n*Lacks a sense of taste."
+STRINGS.CHARACTER_DESCRIPTIONS.dimitri = "*Crest of Blaiddyd grants him strength.\n*Breaks things easily.\n*Lacks a sense of taste."
 STRINGS.CHARACTER_QUOTES.dimitri = "\"The dead demand justice.\""
 
 
@@ -71,3 +71,25 @@ STRINGS.NAMES.DIMITRICAPE = "Dimitri's Cape"
 -- descriptions
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.AREADBHAR = "A jagged lance carved out of bone."
 STRINGS.CHARACTERS.DIMITRI.DESCRIBE.AREADBHAR = "With this I shall avenge the fallen."
+
+
+-- make Dimitri unable to sew
+AddPrefabPostInit(
+    "sewing_kit",
+    function(inst)
+	
+	if GLOBAL.ThePlayer and GLOBAL.ThePlayer.prefab == "dimitri" then
+		inst.components.sewing.repair_value = 0
+	end
+	
+	local function onsewn_new(inst, target, doer)
+		
+		if doer.prefab == "dimitri" then
+			doer.components.talker:Say("I made a mess of it.")
+		end
+		`
+	end
+	
+	inst.components.sewing.onsewn = onsewn_new
+	
+end)

@@ -61,7 +61,7 @@ local master_postinit = function(inst)
 	inst.components.sanity:SetMax(100)
 	
 	-- Damage multiplier (optional)
-    inst.components.combat.damagemultiplier = 2
+    inst.components.combat.damagemultiplier = 1.7
 	
 	-- Hunger rate (optional)
 	inst.components.hunger.hungerrate = 1 * TUNING.WILSON_HUNGER_RATE
