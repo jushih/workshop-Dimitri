@@ -2,7 +2,6 @@ local assets=
 { 
     Asset("ANIM", "anim/areadbhar.zip"),
     Asset("ANIM", "anim/swap_areadbhar.zip"), 
-
     Asset("ATLAS", "images/inventoryimages/areadbhar.xml"),
     Asset("IMAGE", "images/inventoryimages/areadbhar.tex"),
 }
@@ -30,14 +29,28 @@ local function onfinished(inst)
 end
 
 
-local function onattack_areadbhar(inst, attacker, target)
+local function onattack_areadbhar(weapon, attacker, target)
 
+	-- non-crest bearers take damage from using areadbhar
 	if attacker and attacker.components.health and attacker.components.sanity and attacker.prefab ~= 'dimitri' then
 		
 		attacker.components.talker:Say("This weapon feels unsettling.")
 		attacker.components.health:DoDelta(-30)
 		attacker.components.sanity:DoDelta(-30)
     end
+	
+	-- weapon durability decreases faster
+	if attacker and attacker.prefab == 'dimitri' then
+	
+		if target ~= nil and weapon.components.finiteuses then
+		
+			if weapon.components.finiteuses.total >= 2 then
+				weapon.components.finiteuses:Use(1)
+			end
+
+		end
+	end
+	
 end
 
 local function fn(colour)
