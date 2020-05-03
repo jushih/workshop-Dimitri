@@ -11,6 +11,24 @@ local prefabs =
 {
 }
 
+-- remove broken weapon and spawn crest stone
+local function onfinished(inst)
+	local stone = "redgem"
+	local bone = "boneshard"
+	local pos1 = Vector3(inst.Transform:GetWorldPosition());pos1.z = pos1.z + math.random(-1,1);pos1.x = pos1.x + math.random(-1,1)
+	local pos2 = Vector3(inst.Transform:GetWorldPosition());pos2.z = pos2.z + math.random(-1,1);pos2.x = pos2.x + math.random(-1,1)
+	local pos3 = Vector3(inst.Transform:GetWorldPosition());pos3.z = pos3.z + math.random(-1,1);pos3.x = pos3.x + math.random(-1,1)
+	local pos4 = Vector3(inst.Transform:GetWorldPosition());pos4.z = pos4.z + math.random(-1,1);pos4.x = pos4.x + math.random(-1,1)
+	SpawnPrefab(stone).Transform:SetPosition(pos1:Get());SpawnPrefab("collapse_small").Transform:SetPosition(pos1:Get())
+    inst:Remove()
+	SpawnPrefab(bone).Transform:SetPosition(pos2:Get());SpawnPrefab("collapse_small").Transform:SetPosition(pos2:Get())
+    inst:Remove()
+	SpawnPrefab(bone).Transform:SetPosition(pos3:Get());SpawnPrefab("collapse_small").Transform:SetPosition(pos3:Get())
+    inst:Remove()
+	SpawnPrefab(bone).Transform:SetPosition(pos4:Get());SpawnPrefab("collapse_small").Transform:SetPosition(pos4:Get())
+    inst:Remove()
+end
+
 local function fn(colour)
 
     local function OnEquip(inst, owner) 
@@ -42,9 +60,14 @@ local function fn(colour)
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )
 	
-	
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(20)
+
+    inst:AddComponent("finiteuses")
+    inst.components.finiteuses:SetMaxUses(10)
+    inst.components.finiteuses:SetUses(10)
+    inst.components.finiteuses:SetOnFinished( onfinished)
+    inst.components.finiteuses:SetConsumption(ACTIONS.PLAY, 1)
 
     return inst
 end
