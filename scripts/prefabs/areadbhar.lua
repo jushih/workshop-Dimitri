@@ -29,14 +29,24 @@ local function onfinished(inst)
     inst:Remove()
 end
 
+
+local function onattack_areadbhar(inst, attacker, target)
+
+	if attacker and attacker.components.health and attacker.components.sanity and attacker.prefab ~= 'dimitri' then
+		
+		attacker.components.talker:Say("This weapon feels unsettling.")
+		attacker.components.health:DoDelta(-30)
+		attacker.components.sanity:DoDelta(-30)
+    end
+end
+
 local function fn(colour)
 
     local function OnEquip(inst, owner) 
-        --owner.AnimState:OverrideSymbol("swap_object", "swap_areadbhars", "purplestaff")
-        owner.AnimState:OverrideSymbol("swap_object", "swap_areadbhar", "areadbhar")
-        owner.AnimState:Show("ARM_carry") 
-        owner.AnimState:Hide("ARM_normal") 
-    end
+		owner.AnimState:OverrideSymbol("swap_object", "swap_areadbhar", "areadbhar")
+		owner.AnimState:Show("ARM_carry") 
+		owner.AnimState:Hide("ARM_normal") 
+	end
 
     local function OnUnequip(inst, owner) 
         owner.AnimState:Hide("ARM_carry") 
@@ -61,7 +71,8 @@ local function fn(colour)
     inst.components.equippable:SetOnUnequip( OnUnequip )
 	
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(20)
+    inst.components.weapon:SetDamage(60)
+	inst.components.weapon:SetOnAttack(onattack_areadbhar)
 
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(10)
