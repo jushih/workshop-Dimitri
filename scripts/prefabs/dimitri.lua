@@ -51,21 +51,22 @@ local master_postinit = function(inst)
 	-- choose which sounds this character will play
 	inst.soundsname = "wilson"
 	
-
-	-- Uncomment if "wathgrithr"(Wigfrid) or "webber" voice is used
-    --inst.talker_path_override = "dontstarve_DLC001/characters/"
-	
 	-- Stats	
 	inst.components.health:SetMaxHealth(150)
 	inst.components.hunger:SetMax(150)
 	inst.components.sanity:SetMax(100)
 	
-	-- Damage multiplier (optional)
+	-- Damage multiplier 
     inst.components.combat.damagemultiplier = 1.7
 	
-	-- Hunger rate (optional)
+	-- Hunger rate 
 	inst.components.hunger.hungerrate = 1 * TUNING.WILSON_HUNGER_RATE
 	
+	-- Heats up faster and gets cold slower
+	--inst.components.temperature.inherentinsulation = 60
+	--inst.components.temperature.inherentsummerinsulation = -45
+	inst.components.temperature.inherentinsulation = TUNING.INSULATION_TINY
+    inst.components.temperature.inherentsummerinsulation = -TUNING.INSULATION_TINY
 	
 	-- No sanity gain or penalty from food --------------------
 	

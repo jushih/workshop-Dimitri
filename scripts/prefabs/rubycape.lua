@@ -1,19 +1,19 @@
 local assets =
 {
-	Asset("ANIM", "anim/dimitricape.zip"),
-	Asset("ANIM", "anim/swap_dimitricape.zip"),
-    Asset("ATLAS", "images/inventoryimages/dimitricape.xml"),
-    Asset("IMAGE", "images/inventoryimages/dimitricape.tex"),
+	Asset("ANIM", "anim/rubycape.zip"),
+	Asset("ANIM", "anim/swap_rubycape.zip"),
+    Asset("ATLAS", "images/inventoryimages/rubycape.xml"),
+    Asset("IMAGE", "images/inventoryimages/rubycape.tex"),
 }
 
 local function onequip(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_body", "swap_dimitricape", "backpack")
-    owner.AnimState:OverrideSymbol("swap_body", "swap_dimitricape", "swap_body")
+    owner.AnimState:OverrideSymbol("swap_body", "swap_rubycape", "backpack")
+    owner.AnimState:OverrideSymbol("swap_body", "swap_rubycape", "swap_body")
 end
 
 local function onunequip(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_body")
-    owner.AnimState:ClearOverrideSymbol("dimitricape")
+    owner.AnimState:ClearOverrideSymbol("rubycape")
 end
 
 local function fn()
@@ -27,8 +27,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("dimitricape")
-    inst.AnimState:SetBuild("dimitricape")
+    inst.AnimState:SetBank("rubycape")
+    inst.AnimState:SetBuild("rubycape")
     inst.AnimState:PlayAnimation("idle")
 
     inst.foleysound = "dontstarve/movement/foley/backpack"
@@ -43,12 +43,15 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.cangoincontainer = true
-	inst.components.inventoryitem.imagename = "dimitricape"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/dimitricape.xml"
+	inst.components.inventoryitem.imagename = "rubycape"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/rubycape.xml"
 	inst.components.inventoryitem.keepondeath = true
 
     inst:AddComponent("insulator")
     inst.components.insulator:SetInsulation(TUNING.INSULATION_MED)	
+	
+	inst:AddComponent("waterproofer")
+    inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL)	
 	
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
@@ -62,4 +65,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/inventory/dimitricape", fn, assets)
+return Prefab("common/inventory/rubycape", fn, assets)
