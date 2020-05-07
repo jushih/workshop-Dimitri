@@ -2,8 +2,7 @@ PrefabFiles = {
 	"dimitri",
 	"dimitri_none",
 	"dimitricape",
-	"areadbhar",
-	"rubycape"
+	"areadbhar"
 }
 
 Assets = {
@@ -33,9 +32,6 @@ Assets = {
 	
 	Asset( "IMAGE", "images/names_dimitri.tex" ),
 	Asset( "ATLAS", "images/names_dimitri.xml" ),
-	
-	Asset( "IMAGE", "images/names_gold_dimitri.tex" ),
-	Asset( "ATLAS", "images/names_gold_dimitri.xml" ),
 	
 	Asset( "IMAGE", "images/inventoryimages/areadbhar.tex" ),
 	Asset( "ATLAS", "images/inventoryimages/areadbhar.xml"),
@@ -88,7 +84,7 @@ STRINGS.RECIPE_DESC.AREADBHAR = "A Hero's Relic belonging to one of the ten elit
 
 
 
---Adding reciepe tab and item
+--Adding receipe tab and item
 RECIPETABS.DIMITRI = {str = "DIMITRI", sort = 10, icon = "images/dimitritab.tex", icon_atlas = "images/dimitritab.xml"}
 
 local areadbhar = AddRecipe("areadbhar", {Ingredient("boneshard", 6),Ingredient("redgem", 1)}, RECIPETABS.DIMITRI, TECH.NONE, nil, nil, nil, nil, "dimitri" )
