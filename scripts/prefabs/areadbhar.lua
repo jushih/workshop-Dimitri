@@ -12,7 +12,7 @@ local prefabs =
 
 -- remove broken weapon and spawn crest stone
 local function onfinished(inst)
-	local stone = "redgem"
+	local stone = "creststone"
 	local bone = "boneshard"
 	local pos1 = Vector3(inst.Transform:GetWorldPosition());pos1.z = pos1.z + math.random(-1,1);pos1.x = pos1.x + math.random(-1,1)
 	local pos2 = Vector3(inst.Transform:GetWorldPosition());pos2.z = pos2.z + math.random(-1,1);pos2.x = pos2.x + math.random(-1,1)
@@ -76,6 +76,8 @@ local function fn(colour)
     anim:SetBank("areadbhar")
     anim:SetBuild("areadbhar")
     anim:PlayAnimation("idle")
+	
+    inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "areadbhar"
