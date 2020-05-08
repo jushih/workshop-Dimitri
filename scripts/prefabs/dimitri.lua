@@ -12,6 +12,7 @@ local start_inv = {
 	"flint",
 	"twigs",
 	"twigs",
+	"areadbhar"
 }
 
 -- When the character is revived from human
@@ -68,6 +69,8 @@ local master_postinit = function(inst)
 	inst.components.temperature.inherentinsulation = TUNING.INSULATION_TINY
     inst.components.temperature.inherentsummerinsulation = -TUNING.INSULATION_TINY
 	
+	inst:AddTag("dimitri")
+	
 	-- No sanity gain or penalty from food --------------------
 	
 	local old_Eat = inst.components.eater.Eat
@@ -105,8 +108,8 @@ local master_postinit = function(inst)
 	local dimitricape = SpawnPrefab("dimitricape") 
 	inst.components.inventory:Equip(dimitricape)
 	
-	local areadbhar = SpawnPrefab("areadbhar") 
-	inst.components.inventory:Equip(areadbhar)
+--	local areadbhar = SpawnPrefab("areadbhar") 
+--	inst.components.inventory:Equip(areadbhar)
 	
 	inst.OnLoad = onload
     inst.OnNewSpawn = onload

@@ -70,6 +70,8 @@ local function fn(colour)
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
     MakeInventoryPhysics(inst)
+	
+    inst.entity:SetPristine()
     
     anim:SetBank("areadbhar")
     anim:SetBuild("areadbhar")
@@ -92,6 +94,8 @@ local function fn(colour)
     inst.components.finiteuses:SetUses(10)
     inst.components.finiteuses:SetOnFinished( onfinished)
     inst.components.finiteuses:SetConsumption(ACTIONS.PLAY, 1)
+	
+	
 
     return inst
 end
