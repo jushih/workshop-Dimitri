@@ -3,6 +3,8 @@ local MakePlayerCharacter = require "prefabs/player_common"
 
 local assets = {
     Asset("SCRIPT", "scripts/prefabs/player_common.lua"),
+	Asset( "ANIM", "anim/dimitri.zip" ),
+	Asset( "ANIM", "anim/dimitri_left.zip" ),
 }
 local prefabs = {}
 
@@ -100,20 +102,55 @@ local master_postinit = function(inst)
 	return returnvalue
 	end
 	
-	--------------------------------------------------------
-	
-	-- start with cape equipped
+	-- Start with cape equipped -----------------
 	inst.OnNewSpawn = function()
 	
 	local dimitricape = SpawnPrefab("dimitricape") 
 	inst.components.inventory:Equip(dimitricape)
 	
---	local areadbhar = SpawnPrefab("areadbhar") 
---	inst.components.inventory:Equip(areadbhar)
+	local areadbhar = SpawnPrefab("areadbhar") 
+	inst.components.inventory:Equip(areadbhar)
+
+
+	-- Crit chance ---------------------------
+	inst:ListenForEvent("onattackother", function(inst, data)
+		local critChance = .5
+		
+		if inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) ~= nil then
+
+		
+			local handslot = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+		
+				
+			if math.random() < critChance then
+				inst.components.talker:Say("KILL EVERY LAST ONE OF THEM!")
+				inst.components.health:DoDelta(15)
+				inst.components.sanity:DoDelta(10)
+			end
+		end
+	end)
+
+	local assets = {
+		Asset( "ANIM", "anim/dimitri.zip" ),
+		Asset( "ANIM", "anim/dimitri_left.zip" ),
+		}
+		
+	-- Asymmetry --------------------------------
+	inst:ListenForEvent("locomote", function()
+	
+		if inst:HasTag("playerghost") then 
+			return 
+		end
+		if inst.AnimState:GetCurrentFacing() == 2 then 
+			inst.AnimState:SetBuild("dimitri_left") -- left animation
+		elseif inst.AnimState:GetCurrentFacing() == 0 then 
+			inst.AnimState:SetBuild("dimitri") -- right animation
+		end
+	end)
 	
 	inst.OnLoad = onload
     inst.OnNewSpawn = onload
-	
+
 end
 	
 
