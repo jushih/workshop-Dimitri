@@ -94,7 +94,15 @@ RECIPETABS.DIMITRI = {str = "DIMITRI", sort = 10, icon = "images/dimitritab.tex"
 local areadbhar = AddRecipe("areadbhar", {Ingredient("boneshard", 6),Ingredient("redgem", 1)}, RECIPETABS.DIMITRI, TECH.NONE, nil, nil, nil, nil, "dimitri" )
 areadbhar.atlas = "images/inventoryimages/areadbhar.xml"
 
-
+AddComponentPostInit("workable", 
+	function (Workable, inst)    
+	Workable.old_WorkedBy = Workable.WorkedBy         
+	function Workable:WorkedBy(worker, numworks)            
+	if worker.prefab == "dimitri" and (Workable.action == GLOBAL.ACTIONS.CHOP or Workable.action == GLOBAL.ACTIONS.MINE) then            
+		numworks = numworks*2 or 2        
+	end                
+	return Workable:old_WorkedBy(worker, numworks)    end
+end)
 
 -- make Dimitri unable to sew
 AddPrefabPostInit(
