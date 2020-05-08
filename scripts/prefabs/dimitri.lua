@@ -17,6 +17,19 @@ local start_inv = {
 	"areadbhar"
 }
 
+local function OnPickedItem(inst, data)
+	print(data.object)
+	print(data.object.components)
+
+    if data.object.components.workable ~= nil and
+    data.object.components.workable:CanBeWorked() and
+    data.object.components.workable:GetWorkAction() == ACTIONS.DIG then
+        data.object.components.workable:WorkedBy( inst, 20)
+    end
+
+    print("aall done")
+end
+
 -- When the character is revived from human
 local function onbecamehuman(inst)
 	-- Set speed when not a ghost (optional)
@@ -45,6 +58,7 @@ end
 
 -- This initializes for both the server and client. Tags can be added here.
 local common_postinit = function(inst) 
+    inst:AddTag("takumi")
 	-- Minimap icon
 	inst.MiniMapEntity:SetIcon( "dimitri.tex" )
 end
@@ -147,6 +161,9 @@ local master_postinit = function(inst)
 			inst.AnimState:SetBuild("dimitri") -- right animation
 		end
 	end)
+	
+	--Listen for completed action
+	inst:ListenForEvent("picksomething", OnPickedItem)
 	
 	inst.OnLoad = onload
     inst.OnNewSpawn = onload
