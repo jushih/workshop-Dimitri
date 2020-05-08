@@ -3,7 +3,7 @@ PrefabFiles = {
 	"dimitri_none",
 	"dimitricape",
 	"areadbhar",
-	"rubycape"
+	"creststone"
 }
 
 Assets = {
@@ -34,28 +34,31 @@ Assets = {
 	Asset( "IMAGE", "images/names_dimitri.tex" ),
 	Asset( "ATLAS", "images/names_dimitri.xml" ),
 	
-	Asset( "IMAGE", "images/names_gold_dimitri.tex" ),
-	Asset( "ATLAS", "images/names_gold_dimitri.xml" ),
-	
 	Asset( "IMAGE", "images/inventoryimages/areadbhar.tex" ),
 	Asset( "ATLAS", "images/inventoryimages/areadbhar.xml"),
 	
 	Asset( "IMAGE", "images/inventoryimages/dimitricape.tex" ),
 	Asset( "ATLAS", "images/inventoryimages/dimitricape.xml"),
+
+	Asset( "IMAGE", "images/inventoryimages/creststone.tex" ),
+	Asset( "ATLAS", "images/inventoryimages/creststone.xml"),
 	
 	Asset( "IMAGE", "images/dimitritab.tex" ),
 	Asset( "ATLAS", "images/dimitritab.xml" ),
-	
+
 }
 
-AddMinimapAtlas("images/map_icons/dimitri.xml")
 
 local require = GLOBAL.require
 local STRINGS = GLOBAL.STRINGS
 local RECIPETABS = GLOBAL.RECIPETABS
 local TECH = GLOBAL.TECH
 local Ingredient = GLOBAL.Ingredient
+local TUNING = GLOBAL.TUNING
 
+
+--local resolvefilepath = GLOBAL.resolvefilepath
+--local Recipe = GLOBAL.Recipe
 
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.dimitri = "The Tempest King"
@@ -71,28 +74,19 @@ STRINGS.CHARACTERS.DIMITRI = require "speech_dimitri"
 STRINGS.NAMES.DIMITRI = "Dimitri"
 STRINGS.SKIN_NAMES.dimitri_none = "Dimitri"
 
--- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.
-AddModCharacter("dimitri", "MALE")
-
-
 -- item names 
 STRINGS.NAMES.AREADBHAR = "Areadbhar"
 STRINGS.NAMES.DIMITRICAPE = "Dimitri's Cape"
+STRINGS.NAMES.CRESTSTONE = "Crest Stone"
 
 -- descriptions
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.AREADBHAR = "A jagged lance carved out of bone."
 STRINGS.CHARACTERS.DIMITRI.DESCRIBE.AREADBHAR = "With this I shall avenge the fallen."
-
-STRINGS.RECIPE_DESC.AREADBHAR = "A Hero's Relic belonging to one of the ten elites." 
-
-
+STRINGS.CHARACTERS.DIMITRI.DESCRIBE.AREADBHAR = "A stone with an engraving."
+STRINGS.CHARACTERS.DIMITRI.DESCRIBE.CRESTSTONE = "A stone engraved with the Crest of Blaiddyd."
 
 
---Adding reciepe tab and item
-RECIPETABS.DIMITRI = {str = "DIMITRI", sort = 10, icon = "images/dimitritab.tex", icon_atlas = "images/dimitritab.xml"}
-
-local areadbhar = AddRecipe("areadbhar", {Ingredient("boneshard", 6),Ingredient("redgem", 1)}, RECIPETABS.DIMITRI, TECH.NONE, nil, nil, nil, nil, "dimitri" )
-areadbhar.atlas = "images/inventoryimages/areadbhar.xml"
+AddMinimapAtlas("images/map_icons/dimitri.xml")
 
 AddComponentPostInit("workable", 
 	function (Workable, inst)    
@@ -103,6 +97,10 @@ AddComponentPostInit("workable",
 	end                
 	return Workable:old_WorkedBy(worker, numworks)    end
 end)
+
+-- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.
+AddModCharacter("dimitri", "MALE")
+
 
 -- make Dimitri unable to sew
 AddPrefabPostInit(
@@ -125,3 +123,19 @@ AddPrefabPostInit(
 	inst.components.sewing.onsewn = onsewn_new
 	
 end)
+
+-- custom crafting
+local creststone = Ingredient( "creststone", 1)
+creststone.atlas = "images/inventoryimages/creststone.xml"
+
+RECIPETABS.DIMITRI = {str = "DIMITRI", sort = 19, icon = "dimitritab.tex", icon_atlas = "images/dimitritab.xml"}
+
+local areadbhar = AddRecipe("areadbhar", {Ingredient("boneshard", 6), creststone}, RECIPETABS.DIMITRI, TECH.NONE, nil, nil, nil, nil, "dimitri", "images/inventoryimages/areadbhar.xml", "areadbhar.tex")
+areadbhar.atlas = "images/inventoryimages/areadbhar.xml"
+
+local dimitricape = AddRecipe("dimitricape", {Ingredient("bearger_fur", 1),Ingredient("silk", 6)}, RECIPETABS.DIMITRI, TECH.NONE, nil, nil, nil, nil, "dimitri", "images/inventoryimages/dimitricape.xml", "dimitricape.tex")
+dimitricape.atlas = "images/inventoryimages/dimitricape.xml"
+
+
+STRINGS.RECIPE_DESC.AREADBHAR = "A lance powered by the Blaiddyd Crest." 
+STRINGS.RECIPE_DESC.DIMITRICAPE = "Weathers the frigid lands of Faerghus." 

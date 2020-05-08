@@ -12,6 +12,7 @@ local start_inv = {
 	"flint",
 	"twigs",
 	"twigs",
+	"areadbhar"
 }
 
 local function OnPickedItem(inst, data)
@@ -82,6 +83,8 @@ local master_postinit = function(inst)
 	inst.components.temperature.inherentinsulation = TUNING.INSULATION_TINY
     inst.components.temperature.inherentsummerinsulation = -TUNING.INSULATION_TINY
 	
+	inst:AddTag("dimitri")
+	
 	-- No sanity gain or penalty from food --------------------
 	
 	local old_Eat = inst.components.eater.Eat
@@ -119,8 +122,8 @@ local master_postinit = function(inst)
 	local dimitricape = SpawnPrefab("dimitricape") 
 	inst.components.inventory:Equip(dimitricape)
 	
-	local areadbhar = SpawnPrefab("areadbhar") 
-	inst.components.inventory:Equip(areadbhar)
+--	local areadbhar = SpawnPrefab("areadbhar") 
+--	inst.components.inventory:Equip(areadbhar)
 	
 	--Listen for completed action
 	inst:ListenForEvent("picksomething", OnPickedItem)
