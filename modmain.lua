@@ -92,7 +92,7 @@ AddComponentPostInit("workable",
 	function (Workable, inst)    
 	Workable.old_WorkedBy = Workable.WorkedBy         
 	function Workable:WorkedBy(worker, numworks)            
-	if worker.prefab == "dimitri" and (Workable.action == GLOBAL.ACTIONS.CHOP or Workable.action == GLOBAL.ACTIONS.MINE) then            
+	if worker.prefab == "dimitri" and (Workable.action == GLOBAL.ACTIONS.CHOP or Workable.action == GLOBAL.ACTIONS.MINE or Workable.action == GLOBAL.ACTIONS.HAMMER) then            
 		numworks = numworks*2 or 2        
 	end                
 	return Workable:old_WorkedBy(worker, numworks)    end
@@ -100,7 +100,6 @@ end)
 
 -- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.
 AddModCharacter("dimitri", "MALE")
-
 
 -- make Dimitri unable to sew
 AddPrefabPostInit(
