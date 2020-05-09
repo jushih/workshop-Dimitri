@@ -18,16 +18,22 @@ local start_inv = {
 }
 
 local function OnPickedItem(inst, data)
-	print(data.object)
-	print(data.object.components)
-
     if data.object.components.workable ~= nil and
     data.object.components.workable:CanBeWorked() and
     data.object.components.workable:GetWorkAction() == ACTIONS.DIG then
-        data.object.components.workable:WorkedBy( inst, 20)
+      data.object.components.workable:WorkedBy( inst, 20)
     end
+end
 
-    print("aall done")
+local function OnWorking(inst, data)
+	print(inst) --dimitri
+	print(inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS))
+	local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+	if data.target ~= nil and data.target.components.workable ~= nil then
+		if data.target.components.workable.action == ACTIONS.CHOP or data.target.components.workable.action == ACTIONS.MINE  or data.target.components.workable.action == ACTIONS.HAMMER then
+			equip.components.finiteuses:Use(1)
+		end
+	end
 end
 
 -- When the character is revived from human
@@ -164,6 +170,8 @@ local master_postinit = function(inst)
 	
 	--Listen for completed action
 	inst:ListenForEvent("picksomething", OnPickedItem)
+	inst:ListenForEvent("working", OnWorking)
+	
 	
 	inst.OnLoad = onload
     inst.OnNewSpawn = onload
