@@ -160,6 +160,10 @@ local master_postinit = function(inst)
 	--Listen for completed action
 	inst:ListenForEvent("picksomething", OnPickedItem)
 	inst:ListenForEvent("working", OnWorking)
+
+	
+	inst.OnLoad = onload
+    --inst.OnNewSpawn = onload
 	
 	-- Start with cape equipped ----------------- 
 	inst.OnNewSpawn = function()
@@ -170,11 +174,7 @@ local master_postinit = function(inst)
 	local areadbhar = SpawnPrefab("areadbhar") 
 	inst.components.inventory:Equip(areadbhar)
 	
-	end
-	
-	
-	inst.OnLoad = onload
-    inst.OnNewSpawn = onload
+	end	
 
 
 	
