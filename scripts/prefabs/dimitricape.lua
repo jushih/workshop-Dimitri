@@ -26,7 +26,7 @@ local function fn()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-
+	
     inst.AnimState:SetBank("dimitricape")
     inst.AnimState:SetBuild("dimitricape")
     inst.AnimState:PlayAnimation("idle")

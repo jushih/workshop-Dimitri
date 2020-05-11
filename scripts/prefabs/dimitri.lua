@@ -13,8 +13,7 @@ local start_inv = {
 	"flint",
 	"flint",
 	"twigs",
-	"twigs",
-	"areadbhar"
+	"twigs"
 }
 
 local function OnPickedItem(inst, data)
@@ -121,16 +120,6 @@ local master_postinit = function(inst)
 	-- Then we return the value returned by the original Eat function.
 	return returnvalue
 	end
-	
-	-- Start with cape equipped -----------------
-	inst.OnNewSpawn = function()
-	
-	local dimitricape = SpawnPrefab("dimitricape") 
-	inst.components.inventory:Equip(dimitricape)
-	
-	local areadbhar = SpawnPrefab("areadbhar") 
-	inst.components.inventory:Equip(areadbhar)
-
 
 	-- Crit chance ---------------------------
 	inst:ListenForEvent("onattackother", function(inst, data)
@@ -143,7 +132,7 @@ local master_postinit = function(inst)
 		
 				
 			if math.random() < critChance then
-				inst.components.talker:Say("KILL EVERY LAST ONE OF THEM!")
+				inst.components.talker:Say("KILL EVERY LAST ONE OF THEM!!!")
 				inst.components.health:DoDelta(15)
 				inst.components.sanity:DoDelta(10)
 			end
@@ -172,11 +161,22 @@ local master_postinit = function(inst)
 	inst:ListenForEvent("picksomething", OnPickedItem)
 	inst:ListenForEvent("working", OnWorking)
 	
+	-- Start with cape equipped ----------------- 
+	inst.OnNewSpawn = function()
+	
+	local dimitricape = SpawnPrefab("dimitricape") 
+	inst.components.inventory:Equip(dimitricape)
+	
+	local areadbhar = SpawnPrefab("areadbhar") 
+	inst.components.inventory:Equip(areadbhar)
+	
+	end
+	
 	
 	inst.OnLoad = onload
     inst.OnNewSpawn = onload
 
-end
+
 	
 
 end
