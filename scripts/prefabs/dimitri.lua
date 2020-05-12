@@ -79,7 +79,7 @@ local master_postinit = function(inst)
 	inst.components.sanity:SetMax(100)
 	
 	-- Damage multiplier 
-    inst.components.combat.damagemultiplier = 1.7
+    inst.components.combat.damagemultiplier = 1.2
 	
 	-- Hunger rate 
 	inst.components.hunger.hungerrate = 1 * TUNING.WILSON_HUNGER_RATE
@@ -126,15 +126,21 @@ local master_postinit = function(inst)
 		local critChance = .5
 		
 		if inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) ~= nil then
-
-		
 			local handslot = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-		
-				
+			if handslot.components.finiteuses then
+				if handslot.components.finiteuses.total >= 2 then
+					handslot.components.finiteuses:Use(1)
+				end
+			end
 			if math.random() < critChance then
-				inst.components.talker:Say("KILL EVERY LAST ONE OF THEM!!!")
-				inst.components.health:DoDelta(15)
-				inst.components.sanity:DoDelta(10)
+				--inst.components.talker:Say("KILL EVERY LAST ONE OF THEM!!!")
+				
+				if data.target ~= nil and data.weapon ~= nil then
+					local damage = inst.components.combat:CalcDamage(data.target, data.weapon, 1)
+					print(damage)
+					inst.components.talker:Say("KILL EVERY LAST ONE OF THEM!!!")
+					data.target.components.health:DoDelta(-damage)
+				end
 			end
 		end
 	end)
