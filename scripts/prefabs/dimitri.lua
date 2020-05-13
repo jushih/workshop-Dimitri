@@ -130,7 +130,7 @@ local master_postinit = function(inst)
 		
 			local handslot = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 		
-				
+			
 			if math.random() < critChance then
 				inst.components.talker:Say("KILL EVERY LAST ONE OF THEM!!!")
 				inst.components.health:DoDelta(15)
