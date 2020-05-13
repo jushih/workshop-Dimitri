@@ -92,9 +92,9 @@ local function fn(colour)
 	inst.components.weapon:SetOnAttack(onattack_areadbhar)
 
     inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(10)
-    inst.components.finiteuses:SetUses(10)
-    inst.components.finiteuses:SetOnFinished( onfinished)
+    inst.components.finiteuses:SetMaxUses(40)
+    inst.components.finiteuses:SetUses(40)
+    inst.components.finiteuses:SetOnFinished(onfinished)
     inst.components.finiteuses:SetConsumption(ACTIONS.PLAY, 1)
 	
 	
