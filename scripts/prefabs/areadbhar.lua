@@ -40,16 +40,6 @@ local function onattack_areadbhar(weapon, attacker, target)
     end
 	
 	-- weapon durability decreases faster
-	if attacker and attacker.prefab == 'dimitri' then
-	
-		if target ~= nil and weapon.components.finiteuses then
-		
-			if weapon.components.finiteuses.total >= 2 then
-				weapon.components.finiteuses:Use(1)
-			end
-
-		end
-	end
 	
 end
 
@@ -88,7 +78,7 @@ local function fn(colour)
     inst.components.equippable:SetOnUnequip( OnUnequip )
 	
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(60)
+    inst.components.weapon:SetDamage(100)
 	inst.components.weapon:SetOnAttack(onattack_areadbhar)
 
     inst:AddComponent("finiteuses")
