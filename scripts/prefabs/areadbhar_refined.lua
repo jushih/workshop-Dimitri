@@ -40,6 +40,16 @@ local function onattack_areadbhar(weapon, attacker, target)
     end
 	
 	-- weapon durability decreases faster
+	if attacker and attacker.prefab == 'dimitri' then
+	
+		if target ~= nil and weapon.components.finiteuses then
+		
+			if weapon.components.finiteuses.total >= 2 then
+				weapon.components.finiteuses:Use(1)
+			end
+
+		end
+	end
 	
 end
 
@@ -82,8 +92,8 @@ local function fn(colour)
 	inst.components.weapon:SetOnAttack(onattack_areadbhar)
 
     inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(40)
-    inst.components.finiteuses:SetUses(40)
+    inst.components.finiteuses:SetMaxUses(80)
+    inst.components.finiteuses:SetUses(80)
     inst.components.finiteuses:SetOnFinished(onfinished)
     inst.components.finiteuses:SetConsumption(ACTIONS.PLAY, 1)
 	
@@ -92,4 +102,4 @@ local function fn(colour)
     return inst
 end
 
-return  Prefab("common/inventory/areadbhar", fn, assets, prefabs)
+return  Prefab("common/inventory/areadbhar_refined", fn, assets, prefabs)
