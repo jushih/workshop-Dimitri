@@ -34,6 +34,11 @@ local function OnWorking(inst, data)
 		end
 	end
 end
+local function OnEquip(inst, data)
+	if data.item ~= nil and data.item.prefab == "armormarble" then
+		data.item.components.equippable.walkspeedmult = 1
+	end
+end
 
 -- When the character is revived from human
 local function onbecamehuman(inst)
@@ -197,6 +202,7 @@ local master_postinit = function(inst)
 	--Listen for completed action
 	inst:ListenForEvent("picksomething", OnPickedItem)
 	inst:ListenForEvent("working", OnWorking)
+	inst:ListenForEvent("equip", OnEquip)
 
 	
 	inst.OnLoad = onload
