@@ -34,6 +34,7 @@ local function OnWorking(inst, data)
 		end
 	end
 end
+
 local function OnEquip(inst, data)
 	if data.item ~= nil and data.item.prefab == "armormarble" then
 		data.item.components.equippable.walkspeedmult = 1
@@ -46,7 +47,7 @@ local function onbecamehuman(inst)
 	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "dimitri_speed_mod", 1)
 end
 
--- local function onbecameghost(inst)
+local function onbecameghost(inst)
 	-- Remove speed modifier when becoming a ghost
    inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "dimitri_speed_mod")
 end
