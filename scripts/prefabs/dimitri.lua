@@ -41,7 +41,7 @@ local function onbecamehuman(inst)
 	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "dimitri_speed_mod", 1)
 end
 
-local function onbecameghost(inst)
+-- local function onbecameghost(inst)
 	-- Remove speed modifier when becoming a ghost
    inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "dimitri_speed_mod")
 end
@@ -63,7 +63,7 @@ end
 
 -- This initializes for both the server and client. Tags can be added here.
 local common_postinit = function(inst) 
-    inst:AddTag("takumi")
+
 	-- Minimap icon
 	inst.MiniMapEntity:SetIcon( "dimitri.tex" )
 end
@@ -79,7 +79,7 @@ local master_postinit = function(inst)
 	inst.components.sanity:SetMax(100)
 	
 	-- Damage multiplier 
-    inst.components.combat.damagemultiplier = 1.2
+    inst.components.combat.damagemultiplier = 1.5
 	
 	-- Hunger rate 
 	inst.components.hunger.hungerrate = 1 * TUNING.WILSON_HUNGER_RATE
@@ -123,7 +123,7 @@ local master_postinit = function(inst)
 
 	-- Crit chance ---------------------------
 	inst:ListenForEvent("onattackother", function(inst, data)
-		local critChance = .5
+		local critChance = .07
 		
 		if inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) ~= nil then
 			local handslot = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
@@ -133,13 +133,39 @@ local master_postinit = function(inst)
 				end
 			end
 			if math.random() < critChance then
-				--inst.components.talker:Say("KILL EVERY LAST ONE OF THEM!!!")
 				
 				if data.target ~= nil and data.weapon ~= nil then
 					local damage = inst.components.combat:CalcDamage(data.target, data.weapon, 1)
 					print(damage)
-					inst.components.talker:Say("KILL EVERY LAST ONE OF THEM!!!")
-					data.target.components.health:DoDelta(-damage)
+					if (inst.components.sanity:GetPercent() < .40) then
+					
+						local dialogChance = math.random(0,8)
+						
+						if dialogChance >= 6 then 
+							inst.components.talker:Say("KILL EVERY LAST ONE OF THEM!!!")
+						elseif dialogChance >= 4 then
+							inst.components.talker:Say("HUNT THEM LIKE BEASTS!!!")
+						else 
+							inst.components.talker:Say("I'LL DESTROY YOU!")
+						end
+						
+						data.target.components.health:DoDelta(-damage)
+						
+					else
+						
+						local dialogChance = math.random(0,8)
+						
+						if dialogChance >= 6 then 
+							inst.components.talker:Say("Right where I want you!")
+						elseif dialogChance >= 4 then
+							inst.components.talker:Say("I'll cut through!")
+						else 
+							inst.components.talker:Say("Now to end it!")
+						end
+						
+						data.target.components.health:DoDelta(-damage)
+						
+					end
 				end
 			end
 		end
@@ -162,6 +188,8 @@ local master_postinit = function(inst)
 			inst.AnimState:SetBuild("dimitri") -- right animation
 		end
 	end)
+	
+		
 	
 	--Listen for completed action
 	inst:ListenForEvent("picksomething", OnPickedItem)
