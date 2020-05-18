@@ -34,6 +34,11 @@ local function OnWorking(inst, data)
 		end
 	end
 end
+local function OnEquip(inst, data)
+	if data.item ~= nil and data.item.prefab == "armormarble" then
+		data.item.components.equippable.walkspeedmult = 1
+	end
+end
 
 -- When the character is revived from human
 local function onbecamehuman(inst)
@@ -64,6 +69,8 @@ end
 -- This initializes for both the server and client. Tags can be added here.
 local common_postinit = function(inst) 
 
+	inst:AddTag("dimitri")
+
 	-- Minimap icon
 	inst.MiniMapEntity:SetIcon( "dimitri.tex" )
 end
@@ -88,9 +95,7 @@ local master_postinit = function(inst)
 	--inst.components.temperature.inherentinsulation = 60
 	--inst.components.temperature.inherentsummerinsulation = -45
 	inst.components.temperature.inherentinsulation = TUNING.INSULATION_TINY
-    inst.components.temperature.inherentsummerinsulation = -TUNING.INSULATION_TINY
-	
-	inst:AddTag("dimitri")
+    inst.components.temperature.inherentsummerinsulation = -TUNING.INSULATION_TINY	
 	
 	-- No sanity gain or penalty from food --------------------
 	
@@ -123,7 +128,9 @@ local master_postinit = function(inst)
 
 	-- Crit chance ---------------------------
 	inst:ListenForEvent("onattackother", function(inst, data)
+
 		local critChance = .07
+		local slipChance = .5
 		
 		if inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) ~= nil then
 			local handslot = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
@@ -168,6 +175,40 @@ local master_postinit = function(inst)
 					end
 				end
 			end
+			
+			print(handslot.prefab)
+			if data.weapon ~= nil and handslot.prefab ~= nil and handslot.prefab == "hambat" then
+				if math.random() < slipChance then
+					print("slip")
+					local projectile =
+					data.weapon ~= nil and
+					data.projectile == nil and
+					(data.weapon.components.projectile ~= nil or data.weapon.components.complexprojectile ~= nil)
+
+					inst.components.inventory:Unequip(EQUIPSLOTS.HANDS, true)
+					inst.components.inventory:DropItem(handslot)
+					if handslot.Physics ~= nil then
+						print("physics")
+						local x, y, z = handslot.Transform:GetWorldPosition()
+						handslot.Physics:Teleport(x, .3, z)
+
+						local angle = (math.random() * 20 - 10) * (3.14159/180)
+						if data.target ~= nil and data.target:IsValid() then
+							local x1, y1, z1 = inst.Transform:GetWorldPosition()
+							x, y, z = data.target.Transform:GetWorldPosition()
+							angle = angle + (
+								(x1 == x and z1 == z and math.random() * 2 * 3.14159) or
+								(projectile and math.atan2(z - z1, x - x1)) or
+								math.atan2(z1 - z, x1 - x)
+							)
+						else
+							angle = angle + math.random() * 2 * 3.14159
+						end
+						local speed = projectile and 2 + math.random() or 3 + math.random() * 2
+						handslot.Physics:SetVel(math.cos(angle) * speed, 10, math.sin(angle) * speed)	
+					end	
+				end
+			end
 		end
 	end)
 
@@ -190,10 +231,10 @@ local master_postinit = function(inst)
 	end)
 	
 		
-	
 	--Listen for completed action
 	inst:ListenForEvent("picksomething", OnPickedItem)
 	inst:ListenForEvent("working", OnWorking)
+	inst:ListenForEvent("equip", OnEquip)
 
 	
 	inst.OnLoad = onload
