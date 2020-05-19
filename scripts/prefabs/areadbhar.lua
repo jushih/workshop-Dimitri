@@ -43,29 +43,34 @@ local function onattack_areadbhar(weapon, attacker, target)
 	
 end
 
-local function fn(colour)
+local function OnEquip(inst, owner) 
+    owner.AnimState:OverrideSymbol("swap_object", "swap_areadbhar", "areadbhar")
+    owner.AnimState:Show("ARM_carry") 
+    owner.AnimState:Hide("ARM_normal") 
+end
 
-    local function OnEquip(inst, owner) 
-		owner.AnimState:OverrideSymbol("swap_object", "swap_areadbhar", "areadbhar")
-		owner.AnimState:Show("ARM_carry") 
-		owner.AnimState:Hide("ARM_normal") 
-	end
+local function OnUnequip(inst, owner) 
+    owner.AnimState:Hide("ARM_carry") 
+    owner.AnimState:Show("ARM_normal") 
+end
 
-    local function OnUnequip(inst, owner) 
-        owner.AnimState:Hide("ARM_carry") 
-        owner.AnimState:Show("ARM_normal") 
-    end
-
+local function fn()
+    
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
     MakeInventoryPhysics(inst)
 	
+    if not TheWorld.ismastersim then
+        return inst
+    end
     inst.entity:SetPristine()
     
     anim:SetBank("areadbhar")
     anim:SetBuild("areadbhar")
     anim:PlayAnimation("idle")
+
 	
     inst:AddComponent("inspectable")
 

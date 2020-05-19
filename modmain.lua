@@ -46,7 +46,13 @@ Assets = {
 	
 	Asset( "IMAGE", "images/dimitritab.tex" ),
 	Asset( "ATLAS", "images/dimitritab.xml" ),
-
+	
+	Asset( "SOUNDPACKAGE", "sound/brokenweapon.fev" ),
+	Asset( "SOUND", "sound/brokenweapon.fsb" ),
+	
+	Asset("SOUNDPACKAGE", "sound/crestactivate.fev" ),
+	Asset("SOUND", "sound/crestactivate.fsb" ),
+	
 }
 
 

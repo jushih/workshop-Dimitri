@@ -3,8 +3,13 @@ local MakePlayerCharacter = require "prefabs/player_common"
 
 local assets = {
     Asset("SCRIPT", "scripts/prefabs/player_common.lua"),
-	Asset( "ANIM", "anim/dimitri.zip" ),
+	Asset("ANIM", "anim/dimitri.zip" ),
 	Asset( "ANIM", "anim/dimitri_left.zip" ),
+	Asset("SOUNDPACKAGE", "sound/brokenweapon.fev" ),
+	Asset("SOUND", "sound/brokenweapon.fsb" ),
+	Asset("SOUNDPACKAGE", "sound/crestactivate.fev" ),
+	Asset("SOUND", "sound/crestactivate.fsb" ),
+
 }
 local prefabs = {}
 
@@ -141,6 +146,8 @@ local master_postinit = function(inst)
 				end
 			end
 			if math.random() < critChance then
+			
+				inst.SoundEmitter:PlaySound("crestactivate/crestactivate/crestactivate")
 				
 				if data.target ~= nil and data.weapon ~= nil then
 					local damage = inst.components.combat:CalcDamage(data.target, data.weapon, 1)
