@@ -15,10 +15,6 @@ local prefabs = {}
 
 -- Custom starting inventory
 local start_inv = {
-	"flint",
-	"flint",
-	"twigs",
-	"twigs"
 }
 
 local function OnPickedItem(inst, data)
@@ -188,6 +184,9 @@ local master_postinit = function(inst)
 			if data.weapon ~= nil and handslot.prefab ~= nil and handslot.prefab == "hambat" then
 				if math.random() < slipChance then
 					print("slip")
+
+					inst.components.talker:Say("I swung too hard!")
+
 					local projectile =
 					data.weapon ~= nil and
 					data.projectile == nil and

@@ -2,9 +2,11 @@ PrefabFiles = {
 	"dimitri",
 	"dimitri_none",
 	"dimitricape",
+	"dimitricape_refined",
 	"areadbhar",
 	"creststone",
-	"areadbhar_refined"
+	"areadbhar_refined",
+
 }
 
 Assets = {
@@ -85,6 +87,7 @@ STRINGS.SKIN_NAMES.dimitri_none = "Dimitri"
 STRINGS.NAMES.AREADBHAR = "Areadbhar"
 STRINGS.NAMES.AREADBHAR_REFINED = "Areadbhar+"
 STRINGS.NAMES.DIMITRICAPE = "Dimitri's Cape"
+STRINGS.NAMES.DIMITRICAPE_REFINED = "Dimitri's Cape+"
 STRINGS.NAMES.CRESTSTONE = "Crest Stone"
 
 -- descriptions
@@ -117,14 +120,17 @@ AddPrefabPostInit(
     function(inst)
 	
 	if GLOBAL.ThePlayer and GLOBAL.ThePlayer.prefab == "dimitri" then
-		inst.components.sewing.repair_value = 0
+		inst.components.sewing.repair_value = TUNING.SEWINGKIT_REPAIR_VALUE * 0.6
 	end
 	
 	local function onsewn_new(inst, target, doer)
-		
+
+
 		if doer.prefab == "dimitri" then
-			doer.components.talker:Say("I made a mess of it.")
-			
+
+			inst.components.finiteuses:Use(1)
+			doer.components.talker:Say("My needlework is horrendous, but it holds together.")
+
 		end
 		
 	end
@@ -142,13 +148,60 @@ RECIPETABS.DIMITRI = {str = "DIMITRI", sort = 19, icon = "dimitritab.tex", icon_
 local areadbhar = AddRecipe("areadbhar", {Ingredient("boneshard", 6), creststone}, RECIPETABS.DIMITRI, TECH.NONE, nil, nil, nil, nil, "dimitri", "images/inventoryimages/areadbhar.xml", "areadbhar.tex")
 areadbhar.atlas = "images/inventoryimages/areadbhar.xml"
 
-local areadbhar_refined = AddRecipe("areadbhar_refined", {Ingredient("fossil_piece", 6), creststone}, RECIPETABS.DIMITRI, TECH.NONE, nil, nil, nil, nil, "dimitri", "images/inventoryimages/areadbhar.xml", "areadbhar.tex")
+local areadbhar_refined = AddRecipe("areadbhar_refined", {Ingredient("fossil_piece", 3), creststone}, RECIPETABS.DIMITRI, TECH.NONE, nil, nil, nil, nil, "dimitri", "images/inventoryimages/areadbhar.xml", "areadbhar.tex")
 areadbhar.atlas = "images/inventoryimages/areadbhar.xml"
 
-local dimitricape = AddRecipe("dimitricape", {Ingredient("bearger_fur", 1),Ingredient("silk", 6)}, RECIPETABS.DIMITRI, TECH.NONE, nil, nil, nil, nil, "dimitri", "images/inventoryimages/dimitricape.xml", "dimitricape.tex")
+local dimitricape = AddRecipe("dimitricape", {Ingredient("coontail", 3),Ingredient("silk", 6)}, RECIPETABS.DIMITRI, TECH.NONE, nil, nil, nil, nil, "dimitri", "images/inventoryimages/dimitricape.xml", "dimitricape.tex")
+dimitricape.atlas = "images/inventoryimages/dimitricape.xml"
+
+local dimitricape_refined = AddRecipe("dimitricape_refined", {Ingredient("bearger_fur", 1),Ingredient("silk", 10)}, RECIPETABS.DIMITRI, TECH.NONE, nil, nil, nil, nil, "dimitri", "images/inventoryimages/dimitricape.xml", "dimitricape.tex")
 dimitricape.atlas = "images/inventoryimages/dimitricape.xml"
 
 
 STRINGS.RECIPE_DESC.AREADBHAR = "A lance powered by the Blaiddyd Crest." 
 STRINGS.RECIPE_DESC.AREADBHAR_REFINED = "Areadbhar refined with greater strength." 
 STRINGS.RECIPE_DESC.DIMITRICAPE = "Weathers the frigid lands of Faerghus." 
+STRINGS.RECIPE_DESC.DIMITRICAPE_REFINED = "Lined with fur to weather any frost." 
+
+
+
+local ACTIONS = GLOBAL.ACTIONS
+local old_sew = ACTIONS.SEW.fn
+
+ACTIONS.SEW.fn = function(act)
+
+	if act.target and act.target.components.armor and act.invobject and act.invobject.components.sewing then
+		if act.target:HasTag("sewablearmor") then
+			return act.invobject.components.sewing:DoArmorSewing(act.target, act.doer)
+
+			end
+
+		end
+	return old_sew(act)
+end
+
+AddComponentPostInit("sewing", function(self)
+
+	self.DoArmorSewing = function(self, target, doer)
+	
+		if target.components.armor and target:HasTag("sewablearmor") then
+	
+			local armor = target.components.armor
+			armor:SetPercent(armor:GetPercent() + 0.5)
+	
+			if self.inst.components.finiteuses then
+	
+				self.inst.components.finiteuses:Use(1)
+	
+			end
+	
+			if self.onsewn then
+	
+				self.onsewn(self.inst, target, doer)
+	
+			end
+		return true
+		end
+	end
+end)
+

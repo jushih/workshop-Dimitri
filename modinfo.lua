@@ -1,6 +1,6 @@
 -- This information tells other players more about the mod
 name = "Dimitri"
-description = "A character template for Don't Starve Together."
+description = "Character mod for Dimitri from Fire Emblem Three Houses."
 author = "Julie"
 version = "1.0" -- This is the version of the template. Change it to your own number.
 

@@ -91,7 +91,7 @@ local function fn()
     inst.components.equippable:SetOnUnequip( OnUnequip )
 	
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(100)
+    inst.components.weapon:SetDamage(120)
 	inst.components.weapon:SetOnAttack(onattack_areadbhar)
 
     inst:AddComponent("finiteuses")

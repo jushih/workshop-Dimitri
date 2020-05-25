@@ -252,10 +252,10 @@ return {
 
 	ANNOUNCE_EAT =
 	{
-		GENERIC = "Looks good. I will eat well and restore my strength.",
+		GENERIC = "I will eat well and restore my strength.",
 		PAINFUL = "Perhaps I should not have eaten that.",
 		SPOILED = "I will eat well and restore my strength.",
-		STALE = "Looks good. I will eat well and restore my strength.",
+		STALE = "I will eat well and restore my strength.",
 		INVALID = "Is this edible?",
         YUCKY = "I will eat well and restore my strength.",
         
@@ -1423,7 +1423,7 @@ return {
 			BURNT = "Who was responsible for this?!",
 			CHOPPED = "Chop every last one of them!",
 			POISON = "Even the trees are vicious here.",
-			GENERIC = "It endures the harsh climate.",
+			GENERIC = "The climate is harsh.",
 		},
 		ACORN = "Sometimes you find edible plants among the weeds.",
         ACORN_SAPLING = "It'll be a tree soon.",
@@ -1434,14 +1434,14 @@ return {
 			BURNING = "What a waste of wood.",
 			BURNT = "Who was responsible for this?!",
 			CHOPPED = "Chop every last one of them!",
-			GENERIC = "It endures the harsh climate.",
+			GENERIC = "The climate is harsh.",
 		},
 		EVERGREEN_SPARSE =
 		{
 			BURNING = "What a waste of wood.",
 			BURNT = "Who was responsible for this?!",
 			CHOPPED = "Chop every last one of them!",
-			GENERIC = "As barren as winter.",
+			GENERIC = "The climate is harsh.",
 		},
 		TWIGGYTREE = 
 		{
@@ -1621,8 +1621,8 @@ return {
 		ICEHOUND = "The Red Wolf Moon hunt begins!",
 		INSANITYROCK =
 		{
-			ACTIVE = "KILL EVERY LAST ONE OF THEM!",
-			INACTIVE = "What have I done?",
+			ACTIVE = "It's changed form.",
+			INACTIVE = "It's changed form.",
 		},
 		JAMMYPRESERVES = "This would go well with roasted pheasant.",
 
@@ -1919,7 +1919,7 @@ return {
         ROCK_ICE =
         {
             GENERIC = "I could mine some ice.",
-            MELTED = "Won't b useful until it freezes again.",
+            MELTED = "Won't be useful until it freezes again.",
         },
         ROCK_ICE_MELTED = "Won't be useful until it freezes again.",
         ICE = "Best kept frozen.",
@@ -1937,8 +1937,8 @@ return {
         BRUSH = "To care for an animal with.",
 		SANITYROCK =
 		{
-			ACTIVE = "That's a CRAZY looking rock!",
-			INACTIVE = "Where did the rest of it go?",
+			ACTIVE = "It's changed form.",
+			INACTIVE = "It's changed form.",
 		},
 		SAPLING =
 		{
@@ -1988,10 +1988,10 @@ return {
 		},
         GARGOYLE_HOUND = "I don't like how it's looking at me.",
         GARGOYLE_WEREPIG = "It looks very lifelike.",
-		SEEDS = "Each one is a tiny mystery.",
-		SEEDS_COOKED = "That cooked the life right out of 'em!",
-		SEWING_KIT = "I hope the needle doesn't snap in two.",
-		SEWING_TAPE = "Good for mending.",
+		SEEDS = "What will it grow into?",
+		SEEDS_COOKED = "Perhaps I was better off planting that.",
+		SEWING_KIT = "I hope I don't snap the needle in two.",
+		SEWING_TAPE = "I can mend things with this.",
 		SHOVEL = "There's a lot going on underground.",
 		SILK = "It comes from a spider.",
 		SKELETON = "Eventually, I too will fall.",
@@ -2004,30 +2004,30 @@ return {
 			STARVING = "It must be starving.",
 			SLEEPING = "It's barely making a peep.",
 		},
-		SMALLMEAT = "A tiny chunk of dead animal.",
-		SMALLMEAT_DRIED = "A little jerky.",
+		SMALLMEAT = "A successful hunt.",
+		SMALLMEAT_DRIED = "Dried meat.",
 		SPAT = "What a crusty looking animal.",
-		SPEAR = "That's one pointy stick.",
-		SPEAR_WATHGRITHR = "It feels very stabby.",
-		WATHGRITHRHAT = "Pretty fancy hat, that.",
+		SPEAR = "I've trained with the lance since I was a child.",
+		SPEAR_WATHGRITHR = "I've trained with the lance since I was a child.",
+		WATHGRITHRHAT = "A war helmet.",
 		SPIDER =
 		{
-			DEAD = "Ewwww!",
-			GENERIC = "I hate spiders.",
-			SLEEPING = "I'd better not be here when he wakes up.",
+			DEAD = "Too weak for this world.",
+			GENERIC = "Spiders crawling about.",
+			SLEEPING = "An opportunity to strike.",
 		},
-		SPIDERDEN = "Sticky!",
-		SPIDEREGGSACK = "I hope these don't hatch. Period.",
+		SPIDERDEN = "Hunt them and let's be off.",
+		SPIDEREGGSACK = "Perhaps I should crush this before it hatches.",
 		SPIDERGLAND = "It has a tangy, antiseptic smell.",
-		SPIDERHAT = "I hope I got all of the spider goo out of it.",
-		SPIDERQUEEN = "AHHHHHHHH! That spider is huge!",
+		SPIDERHAT = "I'll wear it if I must.",
+		SPIDERQUEEN = "I know the face of a monster.",
 		SPIDER_WARRIOR =
 		{
-			DEAD = "Good riddance!",
-			GENERIC = "Looks even meaner than usual.",
-			SLEEPING = "I should keep my distance.",
+			DEAD = "They were no match for my lance.",
+			GENERIC = "Stronger, but no match for my lance.",
+			SLEEPING = "An opportunity to strike.",
 		},
-		SPOILED_FOOD = "It's a furry ball of rotten food.",
+		SPOILED_FOOD = "I'll eat it if I must.",
         STAGEHAND =
         {
 			AWAKE = "Just keep your hand to yourself, alright?",
@@ -2087,7 +2087,7 @@ return {
 		TELESTAFF = "That could reveal the world.",
 		TENT = 
 		{
-			GENERIC = "I get sort of crazy when I don't sleep.",
+			GENERIC = "I doubt I can rest well.",
 			BURNT = "Nothing left to sleep in.",
 		},
 		SIESTAHUT = 
@@ -2096,14 +2096,14 @@ return {
 			BURNT = "It won't provide much shade now.",
 		},
 		TENTACLE = "That looks dangerous.",
-		TENTACLESPIKE = "It's pointy and slimy.",
-		TENTACLESPOTS = "I think these were its genitalia.",
+		TENTACLESPIKE = "Avoid its spikes!",
+		TENTACLESPOTS = "Avoid its spikes",
 		TENTACLE_PILLAR = "A slimy pole.",
         TENTACLE_PILLAR_HOLE = "Seems stinky, but worth exploring.",
 		TENTACLE_PILLAR_ARM = "Little slippery arms.",
 		TENTACLE_GARDEN = "Yet another slimy pole.",
 		TOPHAT = "What a nice hat.",
-		TORCH = "Something to hold back the night.",
+		TORCH = "I can keep going like this.",
 		TRANSISTOR = "It's whirring with electricity.",
 		TRAP = "I wove it real tight.",
 		TRAP_TEETH = "This is a nasty surprise.",
@@ -2434,7 +2434,7 @@ return {
         HEALINGSTAFF = "Mercedes always tended to our injuries.",
         FIREBALLSTAFF = "It calls a meteor from above.",
         HAMMER_MJOLNIR = "It's a heavy hammer for hitting things.",
-        SPEAR_GUNGNIR = "I've trained in the lance since I was a child.",
+        SPEAR_GUNGNIR = "I've trained with the lance since I was a child.",
         BLOWDART_LAVA = "That's a weapon I could use from range.",
         BLOWDART_LAVA2 = "It uses a strong blast of air to propel a projectile.",
         LAVAARENA_LUCY = "That weapon's for throwing.",

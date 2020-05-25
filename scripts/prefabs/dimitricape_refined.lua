@@ -9,6 +9,11 @@ local assets =
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "swap_dimitricape", "backpack")
     owner.AnimState:OverrideSymbol("swap_body", "swap_dimitricape", "swap_body")
+
+    if owner.components.hunger ~= nil then
+        owner.components.hunger.burnratemodifiers:SetModifier(inst, TUNING.ARMORBEARGER_SLOW_HUNGER)
+    end
+
 end
 
 local function onunequip(inst, owner)
@@ -48,7 +53,7 @@ local function fn()
 	inst.components.inventoryitem.keepondeath = true
 
     inst:AddComponent("insulator")
-    inst.components.insulator:SetInsulation(TUNING.INSULATION_MED)	
+    inst.components.insulator:SetInsulation(TUNING.INSULATION_LARGE)	
 	
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
@@ -59,7 +64,7 @@ local function fn()
 	inst.components.equippable.dapperness = TUNING.DAPPERNESS_SMALL
 
 	inst:AddComponent("armor")
-    inst.components.armor:InitCondition(1500, TUNING.ARMORGRASS_ABSORPTION )
+    inst.components.armor:InitCondition(2500, 0.85)
 
     inst:AddTag("needssewing")
     inst:AddTag("sewablearmor")
@@ -67,4 +72,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/inventory/dimitricape", fn, assets)
+return Prefab("common/inventory/dimitricape_refined", fn, assets)
