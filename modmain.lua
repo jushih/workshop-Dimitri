@@ -164,7 +164,7 @@ STRINGS.RECIPE_DESC.DIMITRICAPE = "Weathers the frigid lands of Faerghus."
 STRINGS.RECIPE_DESC.DIMITRICAPE_REFINED = "Lined with fur to weather any frost." 
 
 
-
+-- make cape repairable
 local ACTIONS = GLOBAL.ACTIONS
 local old_sew = ACTIONS.SEW.fn
 

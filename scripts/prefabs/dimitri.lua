@@ -4,7 +4,7 @@ local MakePlayerCharacter = require "prefabs/player_common"
 local assets = {
     Asset("SCRIPT", "scripts/prefabs/player_common.lua"),
 	Asset("ANIM", "anim/dimitri.zip" ),
-	Asset( "ANIM", "anim/dimitri_left.zip" ),
+	Asset("ANIM", "anim/dimitri_left.zip" ),
 	Asset("SOUNDPACKAGE", "sound/brokenweapon.fev" ),
 	Asset("SOUND", "sound/brokenweapon.fsb" ),
 	Asset("SOUNDPACKAGE", "sound/crestactivate.fev" ),
@@ -17,12 +17,27 @@ local prefabs = {}
 local start_inv = {
 }
 
+-- occasionally digs up item he picks
 local function OnPickedItem(inst, data)
-    if data.object.components.workable ~= nil and
-    data.object.components.workable:CanBeWorked() and
-    data.object.components.workable:GetWorkAction() == ACTIONS.DIG then
-      data.object.components.workable:WorkedBy( inst, 20)
-    end
+
+	local digChance = 0.1
+	
+	if math.random() < digChance then
+
+		if data.object.components.workable ~= nil and
+		data.object.components.workable:CanBeWorked() and
+		data.object.components.workable:GetWorkAction() == ACTIONS.DIG then
+			data.object.components.workable:WorkedBy( inst, 20)
+			
+			
+		end
+
+		if math.random() < 0.5 then
+			inst.components.talker:Say("I pulled too hard...")
+		else 
+			inst.components.talker:Say("I let my strength get the better of me.")
+		end
+	end
 end
 
 local function OnWorking(inst, data)

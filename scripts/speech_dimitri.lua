@@ -293,8 +293,8 @@ return {
     ANNOUNCE_RUINS_RESET = "I hear the growling of monsters.",
     ANNOUNCE_SNARED = "I'll break through!",
     ANNOUNCE_REPELLED = "It's shielded!",
-	ANNOUNCE_ENTER_DARK = "The darkness sets in.",
-	ANNOUNCE_ENTER_LIGHT = "A new dawn.",
+	ANNOUNCE_ENTER_DARK = "It's grown dark.",
+	ANNOUNCE_ENTER_LIGHT = "I can see again.",
 	ANNOUNCE_FREEDOM = "I'm free of this prison.",
 	ANNOUNCE_HIGHRESEARCH = "It's all coming together.",
 	ANNOUNCE_HOUNDS = "Something comes. Proceed with caution.",
@@ -1423,7 +1423,7 @@ return {
 			BURNT = "Who was responsible for this?!",
 			CHOPPED = "Chop every last one of them!",
 			POISON = "Even the trees are vicious here.",
-			GENERIC = "The climate is harsh.",
+			GENERIC = "Sometimes you find edible plants among the weeds.",
 		},
 		ACORN = "Sometimes you find edible plants among the weeds.",
         ACORN_SAPLING = "It'll be a tree soon.",
@@ -1434,14 +1434,14 @@ return {
 			BURNING = "What a waste of wood.",
 			BURNT = "Who was responsible for this?!",
 			CHOPPED = "Chop every last one of them!",
-			GENERIC = "The climate is harsh.",
+			GENERIC = "Sometimes you find edible plants among the weeds.",
 		},
 		EVERGREEN_SPARSE =
 		{
 			BURNING = "What a waste of wood.",
 			BURNT = "Who was responsible for this?!",
 			CHOPPED = "Chop every last one of them!",
-			GENERIC = "The climate is harsh.",
+			GENERIC = "Sometimes you find edible plants among the weeds.",
 		},
 		TWIGGYTREE = 
 		{
