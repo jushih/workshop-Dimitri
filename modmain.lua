@@ -65,16 +65,12 @@ local TECH = GLOBAL.TECH
 local Ingredient = GLOBAL.Ingredient
 local TUNING = GLOBAL.TUNING
 
-
---local resolvefilepath = GLOBAL.resolvefilepath
---local Recipe = GLOBAL.Recipe
-
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.dimitri = "The Tempest King"
 STRINGS.CHARACTER_NAMES.dimitri = "Dimitri"
 STRINGS.CHARACTER_DESCRIPTIONS.dimitri = "*Crest of Blaiddyd grants him strength.\n*Breaks things easily.\n*Lacks a sense of taste."
 STRINGS.CHARACTER_QUOTES.dimitri = "\"The dead demand justice.\""
-
+STRINGS.CHARACTER_SURVIVABILITY.dimitri = "Pretty damn good."
 
 -- Custom speech strings
 STRINGS.CHARACTERS.DIMITRI = require "speech_dimitri"
@@ -98,6 +94,12 @@ STRINGS.CHARACTERS.DIMITRI.DESCRIBE.AREADBHAR_REFINED = "With this I shall aveng
 STRINGS.CHARACTERS.DIMITRI.DESCRIBE.AREADBHAR = "A stone with an engraving."
 STRINGS.CHARACTERS.DIMITRI.DESCRIBE.CRESTSTONE = "A stone engraved with the Crest of Blaiddyd."
 
+TUNING.DIMITRI_HEALTH = 200
+TUNING.DIMITRI_HUNGER = 200
+TUNING.DIMITRI_SANITY = 100
+
+
+--TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.DIMITRI = { "areadbhar", "dimitricape" }
 
 AddMinimapAtlas("images/map_icons/dimitri.xml")
 
@@ -111,33 +113,101 @@ AddComponentPostInit("workable",
 	return Workable:old_WorkedBy(worker, numworks)    end
 end)
 
+
+
+-- make cape repairable
+local ACTIONS = GLOBAL.ACTIONS
+local old_sew = ACTIONS.SEW.fn
+
+ACTIONS.SEW.fn = function(act)
+
+-- make dimitri's cape repairable
+	if act.target and act.target.components.armor and act.invobject and act.invobject.components.sewing then
+		if act.target:HasTag("sewablearmor") then
+			return act.invobject.components.sewing:DoArmorSewing(act.target, act.doer)
+		end
+	end
+	
+-- makes dimitri bad at sewing in general
+	if act.target and act.invobject and act.invobject.components.sewing then
+		return act.invobject.components.sewing:DoDimitriSewing(act.target, act.doer)
+	end
+		
+	return old_sew(act)
+	
+end
+
+AddComponentPostInit("sewing", function(self)
+
+-- if user is dimitri, sewing kit gets used up more
+	self.DoDimitriSewing = function(self, target, doer)
+		
+		if doer.prefab == "dimitri" then
+
+			local item = target.components.fueled
+			item:SetPercent(item:GetPercent() + 0.20)
+
+			if self.inst.components.finiteuses then
+				doer.components.talker:Say("My needlework is horrendous, but it holds together.")
+				self.inst.components.finiteuses:Use(2)
+			end
+			
+			if self.onsewn then
+				self.onsewn(self.inst, target, doer)
+			end
+		
+		else
+		
+			local item = target.components.fueled
+			item:SetPercent(item:GetPercent() + TUNING.SEWINGKIT_REPAIR_VALUE)
+		
+			if self.inst.components.finiteuses then
+				self.inst.components.finiteuses:Use(1)
+			end
+			
+			if self.onsewn then
+				self.onsewn(self.inst, target, doer)
+			end
+			
+		return true
+			
+		end
+	end 
+
+-- repairs Dimitri's cape
+	self.DoArmorSewing = function(self, target, doer)
+		
+		doer.components.talker:Say("Sewing armor")
+
+		if target.components.armor and target:HasTag("sewablearmor") then
+	
+			local armor = target.components.armor
+			armor:SetPercent(armor:GetPercent() + 0.20)
+	
+			if doer.prefab == "dimitri" then
+				if self.inst.components.finiteuses then
+					doer.components.talker:Say("My needlework is horrendous, but it holds together.")
+					self.inst.components.finiteuses:Use(2)
+				end
+			
+			elseif self.inst.components.finiteuses then
+				self.inst.components.finiteuses:Use(1)
+			end
+		
+			if self.onsewn then
+				self.onsewn(self.inst, target, doer)
+			end
+			
+		return true
+		
+		end
+	end
+end)
+
+
 -- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.
 AddModCharacter("dimitri", "MALE")
 
--- make Dimitri unable to sew
-AddPrefabPostInit(
-    "sewing_kit",
-    function(inst)
-	
-	if GLOBAL.ThePlayer and GLOBAL.ThePlayer.prefab == "dimitri" then
-		inst.components.sewing.repair_value = TUNING.SEWINGKIT_REPAIR_VALUE * 0.6
-	end
-	
-	local function onsewn_new(inst, target, doer)
-
-
-		if doer.prefab == "dimitri" then
-
-			inst.components.finiteuses:Use(1)
-			doer.components.talker:Say("My needlework is horrendous, but it holds together.")
-
-		end
-		
-	end
-	
-	inst.components.sewing.onsewn = onsewn_new
-	
-end)
 
 -- custom crafting
 local creststone = Ingredient( "creststone", 1)
@@ -164,44 +234,4 @@ STRINGS.RECIPE_DESC.DIMITRICAPE = "Weathers the frigid lands of Faerghus."
 STRINGS.RECIPE_DESC.DIMITRICAPE_REFINED = "Lined with fur to weather any frost." 
 
 
--- make cape repairable
-local ACTIONS = GLOBAL.ACTIONS
-local old_sew = ACTIONS.SEW.fn
-
-ACTIONS.SEW.fn = function(act)
-
-	if act.target and act.target.components.armor and act.invobject and act.invobject.components.sewing then
-		if act.target:HasTag("sewablearmor") then
-			return act.invobject.components.sewing:DoArmorSewing(act.target, act.doer)
-
-			end
-
-		end
-	return old_sew(act)
-end
-
-AddComponentPostInit("sewing", function(self)
-
-	self.DoArmorSewing = function(self, target, doer)
-	
-		if target.components.armor and target:HasTag("sewablearmor") then
-	
-			local armor = target.components.armor
-			armor:SetPercent(armor:GetPercent() + 0.5)
-	
-			if self.inst.components.finiteuses then
-	
-				self.inst.components.finiteuses:Use(1)
-	
-			end
-	
-			if self.onsewn then
-	
-				self.onsewn(self.inst, target, doer)
-	
-			end
-		return true
-		end
-	end
-end)
 
