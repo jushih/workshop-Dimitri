@@ -70,7 +70,7 @@ STRINGS.CHARACTER_TITLES.dimitri = "The Tempest King"
 STRINGS.CHARACTER_NAMES.dimitri = "Dimitri"
 STRINGS.CHARACTER_DESCRIPTIONS.dimitri = "*Crest of Blaiddyd grants him strength.\n*Breaks things easily.\n*Lacks a sense of taste."
 STRINGS.CHARACTER_QUOTES.dimitri = "\"The dead demand justice.\""
-STRINGS.CHARACTER_SURVIVABILITY.dimitri = "Pretty damn good."
+STRINGS.CHARACTER_SURVIVABILITY.dimitri = "Depends on the route."
 
 -- Custom speech strings
 STRINGS.CHARACTERS.DIMITRI = require "speech_dimitri"
@@ -143,24 +143,29 @@ AddComponentPostInit("sewing", function(self)
 	self.DoDimitriSewing = function(self, target, doer)
 		
 		if doer.prefab == "dimitri" then
-
 			local item = target.components.fueled
 			item:SetPercent(item:GetPercent() + 0.20)
 
 			if self.inst.components.finiteuses then
-				doer.components.talker:Say("My needlework is horrendous, but it holds together.")
 				self.inst.components.finiteuses:Use(2)
 			end
 			
+			doer.components.talker:Say("My needlework is horrendous, but it holds together.")
+			
 			if self.onsewn then
 				self.onsewn(self.inst, target, doer)
+				
 			end
+			
+			return true
 		
 		else
 		
-			local item = target.components.fueled
-			item:SetPercent(item:GetPercent() + TUNING.SEWINGKIT_REPAIR_VALUE)
+			--local item = target.components.fueled
+			--item:SetPercent(item:GetPercent() + TUNING.SEWINGKIT_REPAIR_VALUE)
 		
+			target.components.fueled:DoDelta(self.repair_value)
+			
 			if self.inst.components.finiteuses then
 				self.inst.components.finiteuses:Use(1)
 			end
@@ -169,7 +174,7 @@ AddComponentPostInit("sewing", function(self)
 				self.onsewn(self.inst, target, doer)
 			end
 			
-		return true
+			return true
 			
 		end
 	end 
@@ -177,20 +182,23 @@ AddComponentPostInit("sewing", function(self)
 -- repairs Dimitri's cape
 	self.DoArmorSewing = function(self, target, doer)
 		
-		doer.components.talker:Say("Sewing armor")
-
 		if target.components.armor and target:HasTag("sewablearmor") then
 	
-			local armor = target.components.armor
-			armor:SetPercent(armor:GetPercent() + 0.20)
-	
 			if doer.prefab == "dimitri" then
+			
+				local armor = target.components.armor
+				armor:SetPercent(armor:GetPercent() + 0.20)
+			
 				if self.inst.components.finiteuses then
 					doer.components.talker:Say("My needlework is horrendous, but it holds together.")
 					self.inst.components.finiteuses:Use(2)
 				end
 			
 			elseif self.inst.components.finiteuses then
+			
+				local armor = target.components.armor
+				armor:SetPercent(armor:GetPercent() + 0.50)
+				
 				self.inst.components.finiteuses:Use(1)
 			end
 		

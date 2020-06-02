@@ -333,7 +333,7 @@ return {
     ANNOUNCE_COMPASS_OUT = "This compass doesn't point anymore.",
 	ANNOUNCE_TRAP_WENT_OFF = "I was careless.",
 	ANNOUNCE_UNIMPLEMENTED = "I don't think it's ready yet.",
-	ANNOUNCE_WORMHOLE = "That was not a sane thing to do.",
+	ANNOUNCE_WORMHOLE = "I still hear their voices.",
 	ANNOUNCE_TOWNPORTALTELEPORT = "I'm not sure that was science.",
 	ANNOUNCE_CANFIX = "I could repair this.",
 	ANNOUNCE_ACCOMPLISHMENT = "I've improved.",
@@ -1419,7 +1419,7 @@ return {
 		},
 		DECIDUOUSTREE = 
 		{
-			BURNING = "What a waste of wood.",
+			BURNING = "Must you continue to conquer?",
 			BURNT = "Who was responsible for this?!",
 			CHOPPED = "Chop every last one of them!",
 			POISON = "Even the trees are vicious here.",
@@ -1431,22 +1431,22 @@ return {
 		BIRCHNUTDRAKE = "How strange.",
 		EVERGREEN =
 		{
-			BURNING = "What a waste of wood.",
+			BURNING = "Must you continue to conquer?",
 			BURNT = "Who was responsible for this?!",
 			CHOPPED = "Chop every last one of them!",
 			GENERIC = "Sometimes you find edible plants among the weeds.",
 		},
 		EVERGREEN_SPARSE =
 		{
-			BURNING = "What a waste of wood.",
-			BURNT = "Who was responsible for this?!",
+			BURNING = "Must you continue to conquer?",
+			BURNT = "What a waste of wood.",
 			CHOPPED = "Chop every last one of them!",
 			GENERIC = "Sometimes you find edible plants among the weeds.",
 		},
 		TWIGGYTREE = 
 		{
-			BURNING = "What a waste of wood.",
-			BURNT = "Who was responsible for this?!",
+			BURNING = "Must you continue to conquer?",
+			BURNT = "What a waste of wood.",
 			CHOPPED = "Chop every last one of them!",
 			GENERIC = "As barren as winter.",			
 			DISEASED = "It looks sick. More so than usual.",
@@ -1693,7 +1693,7 @@ return {
             CHOPPED = "Chop every last one of them!",
             GENERIC = "Those spikes look sharp.",
         },
-        MAXWELL = "I hate that guy.",
+        MAXWELL = "He must be an important figure in this land.",
         MAXWELLHEAD = "I can see into his pores.",
         MAXWELLLIGHT = "I wonder how they work.",
         MAXWELLLOCK = "Looks almost like a key hole.",
@@ -1945,15 +1945,15 @@ return {
 			BURNING = "That's burning fast!",
 			WITHERED = "It might be okay if it cooled down.",
 			GENERIC = "Baby trees are so cute!",
-			PICKED = "That'll teach him.",
+			PICKED = "I should pick them with care..",
 			DISEASED = "It looks pretty sick.",
 			DISEASING = "Err, something's not right.",
 		},
    		SCARECROW = 
    		{
-			GENERIC = "All dressed up and no where to crow.",
-			BURNING = "Someone made that strawman eat crow.",
-			BURNT = "Someone MURDERed that scarecrow!",
+			GENERIC = "All dressed up.",
+			BURNING = "Must you continue to conquer?",
+			BURNT = "There's no salvaging it.",
    		},
    		SCULPTINGTABLE=
    		{
@@ -2041,7 +2041,7 @@ return {
             TYPE3 = "I wonder who the artist is.", --bird bath type statue
         },
 		STATUEHARP = "What happened to the head?",
-		STATUEMAXWELL = "He's a lot shorter in person.",
+		STATUEMAXWELL = "Did he reign over this land?",
 		STEELWOOL = "Scratchy metal fibers.",
 		STINGER = "Looks sharp!",
 		STRAWHAT = "Hats always ruin my hair.",
@@ -2272,7 +2272,7 @@ return {
 		WAFFLES = "This will sustain me.",
 		WALL_HAY = 
 		{	
-			GENERIC = "Hmmmm. I guess that'll have to do.",
+			GENERIC = "Hmmm. I guess that'll have to do.",
 			BURNT = "That won't do at all.",
 		},
 		WALL_HAY_ITEM = "A flimsy wall.",
@@ -2660,7 +2660,7 @@ return {
         QUAGMIRE_SAPLING = "I can't get anything else out of that.",
         QUAGMIRE_BERRYBUSH = "Those berries are all gone.",
 
-        QUAGMIRE_ALTAR_STATUE2 = "What are you looking at?",
+        QUAGMIRE_ALTAR_STATUE2 = "A statue eroding away.",
         QUAGMIRE_ALTAR_QUEEN = "A monumental monument.",
         QUAGMIRE_ALTAR_BOLLARD = "As far as posts go, this one is adequate.",
         QUAGMIRE_ALTAR_IVY = "Kind of clingy.",
@@ -2787,7 +2787,7 @@ return {
 		},
         PUFFIN =
         {
-            GENERIC = "I've never seen a live puffin before.",
+            GENERIC = "Birds not native to the Kingdom.",
             HELD = "Don't struggle.",
             SLEEPING = "It rests.",
         },

@@ -108,6 +108,9 @@ local master_postinit = function(inst)
 	-- Hunger rate 
 	inst.components.hunger.hungerrate = 1 * TUNING.WILSON_HUNGER_RATE
 	
+	-- No penalty from spoiled food
+	inst.components.eater.ignoresspoilage = true
+	
 	-- Heats up faster and gets cold slower
 	--inst.components.temperature.inherentinsulation = 60
 	--inst.components.temperature.inherentsummerinsulation = -45
