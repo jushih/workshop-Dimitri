@@ -297,7 +297,7 @@ return {
 	ANNOUNCE_ENTER_LIGHT = "I can see again.",
 	ANNOUNCE_FREEDOM = "I'm free of this prison.",
 	ANNOUNCE_HIGHRESEARCH = "It's all coming together.",
-	ANNOUNCE_HOUNDS = "Something comes. Proceed with caution.",
+	ANNOUNCE_HOUNDS = "I hear howling. Is it the Red Wolf Moon?",
 	ANNOUNCE_WORMS = "The earth trembles.",
 	ANNOUNCE_HUNGRY = "I should eat to regain my strength.",
 	ANNOUNCE_HUNT_BEAST_NEARBY = "The fresh track of a beast.",
@@ -334,7 +334,7 @@ return {
 	ANNOUNCE_TRAP_WENT_OFF = "I was careless.",
 	ANNOUNCE_UNIMPLEMENTED = "I don't think it's ready yet.",
 	ANNOUNCE_WORMHOLE = "I still hear their voices.",
-	ANNOUNCE_TOWNPORTALTELEPORT = "I'm not sure that was science.",
+	ANNOUNCE_TOWNPORTALTELEPORT = "Teleportation magic.",
 	ANNOUNCE_CANFIX = "I could repair this.",
 	ANNOUNCE_ACCOMPLISHMENT = "I've improved.",
 	ANNOUNCE_ACCOMPLISHMENT_DONE = "That worked out well.",	
@@ -453,7 +453,7 @@ return {
     ANNOUNCE_ATTACH_BUFF_WORKEFFECTIVENESS = "I feel motivated.",
     ANNOUNCE_ATTACH_BUFF_MOISTUREIMMUNITY  = "The moisture's gone.",
     
-    ANNOUNCE_DETACH_BUFF_ELECTRICATTACK    = "The electricity's gone, but the static clings.",
+    ANNOUNCE_DETACH_BUFF_ELECTRICATTACK    = "The static clings.",
     ANNOUNCE_DETACH_BUFF_ATTACK            = "Even my strength has limits.",
     ANNOUNCE_DETACH_BUFF_PLAYERABSORPTION  = "I should proceed more carefully from now on.",
     ANNOUNCE_DETACH_BUFF_WORKEFFECTIVENESS = "The effect wore off.",
@@ -1607,18 +1607,18 @@ return {
 		HONEYHAM = "Sweet and savory.",
 		HONEYNUGGETS = "Ingrid would enjoy this dish.",
 		HORN = "Don't attract needless attention.",
-		HOUND = "The Red Wolf Moon hunt begins!",
+		HOUND = "Hunt them like beasts!",
 		HOUNDCORPSE =
 		{
-			GENERIC = "This season's hunt is over.",
-			BURNING = "This seasons' hunt is over.",
-			REVIVING = "You resist death?",
+			GENERIC = "The hunt is over.",
+			BURNING = "The hunt is over.",
+			REVIVING = "Is this some kind of twisted joke?!",
 		},
 		HOUNDBONE = "Wolf bone.",
 		HOUNDMOUND = "The den of wolves.",
 		ICEBOX = "This will be useful in the summer.",
 		ICEHAT = "A relief to have in the summer.",
-		ICEHOUND = "The Red Wolf Moon hunt begins!",
+		ICEHOUND = "Hunt them like beasts!",
 		INSANITYROCK =
 		{
 			ACTIVE = "It's changed form.",
@@ -1705,10 +1705,10 @@ return {
             DONE = "It's ready.",
             DRYING = "Meat takes a while to dry.",
             DRYINGINRAIN = "Meat takes even longer to dry in rain.",
-            GENERIC = "I should dry some meats.",
+            GENERIC = "I could dry some meat.",
             BURNT = "The rack got dried.",
-            DONE_NOTMEAT = "It's finally dry..",
-            DRYING_NOTMEAT = "Drying things is not an exact science.",
+            DONE_NOTMEAT = "It's finally dry.",
+            DRYING_NOTMEAT = "It's drying.",
             DRYINGINRAIN_NOTMEAT = "This won't dry anytime soon.",
         },
         MEAT_DRIED = "Felix would like this.",
@@ -1912,7 +1912,7 @@ return {
             GENERIC = "I can lift this one.",
             RAISED = "It's out of reach.",
         },
-        ROCK = "It wouldn't fit in my pocket.",
+        ROCK = "I trained by lifting boulders.",
         PETRIFIED_TREE = "A petrified tree.",
         ROCK_PETRIFIED_TREE = "A petrified tree.",
         ROCK_PETRIFIED_TREE_OLD = "A petrified tree.",
@@ -2104,7 +2104,7 @@ return {
 		TENTACLE_GARDEN = "Yet another slimy pole.",
 		TOPHAT = "What a nice hat.",
 		TORCH = "I can keep going like this.",
-		TRANSISTOR = "It's whirring with electricity.",
+		TRANSISTOR = "It whirls with energy.",
 		TRAP = "I wove it real tight.",
 		TRAP_TEETH = "This is a nasty surprise.",
 		TRAP_TEETH_MAXWELL = "I'll want to avoid stepping on that!",
@@ -2126,7 +2126,7 @@ return {
 		TRINKET_3 = "The knot is stuck. Forever.", --Gord's Knot
 		TRINKET_4 = "It must be some kind of religious artifact.", --Gnome
 		TRINKET_5 = "Sadly it's too small for me to escape on.", --Toy Rocketship
-		TRINKET_6 = "Their electricity carrying days are over.", --Frazzled Wires
+		TRINKET_6 = "Their thunder carrying days are over.", --Frazzled Wires
 		TRINKET_7 = "There's no time for fun and games!", --Ball and Cup
 		TRINKET_8 = "Great. All of my tub stopping needs are met.", --Rubber Bung
 		TRINKET_9 = "I'm more of a zipper person, myself.", --Mismatched Buttons
@@ -2137,7 +2137,7 @@ return {
 		TRINKET_14 = "Now if I only had some tea...", --Leaky Teacup
 		TRINKET_15 = "...Maxwell left his stuff out again.", --Pawn
 		TRINKET_16 = "...Maxwell left his stuff out again.", --Pawn
-		TRINKET_17 = "A horrifying utensil fusion. Maybe science *can* go too far.", --Bent Spork
+		TRINKET_17 = "A horrifying utensil fusion.", --Bent Spork
 		TRINKET_18 = "I wonder what it's hiding?", --Trojan Horse
 		TRINKET_19 = "It doesn't spin very well.", --Unbalanced Top
 		TRINKET_20 = "Wigfrid keeps jumping out and hitting me with it?!", --Backscratcher
@@ -2154,7 +2154,7 @@ return {
         TRINKET_31 = "Honestly, he just leaves them out wherever.", --Knight
         TRINKET_32 = "I know someone who'd have a ball with this!", --Cubic Zirconia Ball
         TRINKET_33 = "I hope this doesn't attract spiders.", --Spider Ring
-        TRINKET_34 = "Let's make a wish. For science.", --Monkey Paw
+        TRINKET_34 = "Let's make a wish.", --Monkey Paw
         TRINKET_35 = "Hard to find a good flask around here.", --Empty Elixir
         TRINKET_36 = "I might need these after all that candy.", --Faux fangs
         TRINKET_37 = "I don't believe in the supernatural.", --Broken Stake
@@ -2169,7 +2169,7 @@ return {
         TRINKET_46 = "Maybe a tool for testing aerodynamics?", -- Hairdryer ONI trinket
         
         HALLOWEENCANDY_1 = "The cavities are probably worth it, right?",
-        HALLOWEENCANDY_2 = "What corruption of science grew these?",
+        HALLOWEENCANDY_2 = "What corruption grew these?",
         HALLOWEENCANDY_3 = "It's... corn.",
         HALLOWEENCANDY_4 = "They wriggle on the way down.",
         HALLOWEENCANDY_5 = "My teeth are going to have something to say about this tomorrow.",
@@ -2196,7 +2196,7 @@ return {
         HALLOWEENPOTION_BRAVERY = "Full of grit.",
 		HALLOWEENPOTION_MOON = "Infused with transforming such-and-such.",
 		HALLOWEENPOTION_FIRE_FX = "Crystallized inferno.", 
-		MADSCIENCE_LAB = "Sanity is a small price to pay for science!",
+		MADSCIENCE_LAB = "I'm not much of a smith.",
 		LIVINGTREE_ROOT = "Something's in there! I'll have to root it out.", 
 		LIVINGTREE_SAPLING = "It'll grow up big and horrifying.",
 
@@ -2296,8 +2296,8 @@ return {
 		WALRUSHAT = "I don't know much about what's fashionable.",
 		WALRUS_CAMP =
 		{
-			EMPTY = "The camp's owners could return soon.",
-			GENERIC = "It looks warm and cozy.",
+			EMPTY = "It looks vacant.",
+			GENERIC = "Occupied by walrus.",
 		},
 		WALRUS_TUSK = "I'm sure I'll find a use for it.",
 		WARDROBE = 
@@ -2395,13 +2395,13 @@ return {
 			ROBOT = "%s must've died performing an experiment with %s.",
 			DEFAULT = "%s must've died performing an experiment with %s.",
 		},
-		HUMANMEAT = "Flesh is flesh. Where do I draw the line?",
-		HUMANMEAT_COOKED = "Cooked nice and pink, but still morally gray.",
-		HUMANMEAT_DRIED = "Letting it dry makes it not come from a human, right?",
-		ROCK_MOON = "That rock came from the moon.",
-		MOONROCKNUGGET = "That rock came from the moon.",
-		MOONROCKCRATER = "I should stick something shiny in it. For research.",
-		MOONROCKSEED = "There's science inside!",
+		HUMANMEAT = "What sort of monster have I become?",
+		HUMANMEAT_COOKED = "What sort of monster have I become?",
+		HUMANMEAT_DRIED = "What sort of monster have I become?",
+		ROCK_MOON = "A rock descended from the moon.",
+		MOONROCKNUGGET = "A rock descended from the moon.",
+		MOONROCKCRATER = "I should put something there.",
+		MOONROCKSEED = "An unusual seed.",
 
         REDMOONEYE = "It can see and be seen for miles!",
         PURPLEMOONEYE = "Makes a good marker, but I wish it'd stop looking at me.",
@@ -2458,7 +2458,7 @@ return {
         LAVAARENA_LIGHTDAMAGERHAT = "My strikes would hurt a little more wearing that.",
         LAVAARENA_STRONGDAMAGERHAT = "It looks like it packs a wallop.",
         LAVAARENA_TIARAFLOWERPETALSHAT = "Looks like it amplifies healing expertise.",
-        LAVAARENA_EYECIRCLETHAT = "It has a gaze full of science.",
+        LAVAARENA_EYECIRCLETHAT = "It gazes at me.",
         LAVAARENA_RECHARGERHAT = "Those crystals will quickened my abilities.",
         LAVAARENA_HEALINGGARLANDHAT = "This garland will restore a bit of my vitality.",
         LAVAARENA_CROWNDAMAGERHAT = "That could cause some major destruction.",
@@ -2480,7 +2480,7 @@ return {
         QUAGMIRE_HOE = "It's a farming instrument.",
         
         QUAGMIRE_TURNIP = "It's a raw turnip.",
-        QUAGMIRE_TURNIP_COOKED = "Cooking is science in practice.",
+        QUAGMIRE_TURNIP_COOKED = "I'm not much of a cook.",
         QUAGMIRE_TURNIP_SEEDS = "A handful of odd seeds.",
         
         QUAGMIRE_GARLIC = "The number one breath enhancer.",
@@ -2495,8 +2495,8 @@ return {
         QUAGMIRE_POTATO_COOKED = "A successful temperature experiment.",
         QUAGMIRE_POTATO_SEEDS = "A handful of odd seeds.",
         
-        QUAGMIRE_TOMATO = "It's red because it's full of science.",
-        QUAGMIRE_TOMATO_COOKED = "Cooking's easy if you understand chemistry.",
+        QUAGMIRE_TOMATO = "It resembles a tomato.",
+        QUAGMIRE_TOMATO_COOKED = "Dedue could cook it better.",
         QUAGMIRE_TOMATO_SEEDS = "A handful of odd seeds.",
         
         QUAGMIRE_FLOUR = "Ready for baking.",
@@ -2535,7 +2535,7 @@ return {
 		QUAGMIRE_SALT_RACK =
 		{
 			READY = "Salt has gathered on the rope.",
-			GENERIC = "Science takes time.",
+			GENERIC = "Progress takes time.",
 		},
 		
 		QUAGMIRE_POND_SALT = "A little salty spring.",
@@ -2549,7 +2549,7 @@ return {
 
 		QUAGMIRE_KEY = "Safe bet this'll come in handy.",
 		QUAGMIRE_KEY_PARK = "I'll park it in my pocket until I get to the park.",
-        QUAGMIRE_PORTAL_KEY = "This looks science-y.",
+        QUAGMIRE_PORTAL_KEY = "Where does this lead?",
 
 		
 		QUAGMIRE_MUSHROOMSTUMP =
@@ -2594,10 +2594,10 @@ return {
         QUAGMIRE_FOOD_BURNT = "That one was an experiment.",
         QUAGMIRE_FOOD =
         {
-        	GENERIC = "I should offer it on the Altar of Gnaw.",
+        	GENERIC = "I should offer it on the Altar of the Goddess.",
             MISMATCH = "That's not what it wants.",
-            MATCH = "Science says this will appease the sky God.",
-            MATCH_BUT_SNACK = "It's more of a light snack, really.",
+            MATCH = "May the Goddess be appeased.",
+            MATCH_BUT_SNACK = "It's not much, but it expresses the sentiment.",
         },
         
         QUAGMIRE_FERN = "Probably chock full of vitamins.",
@@ -2620,7 +2620,7 @@ return {
         QUAGMIRE_GRILL_ITEM = "I'll have to grill someone about this.",
         QUAGMIRE_GRILL_SMALL = "Barbecurious.",
         QUAGMIRE_GRILL_SMALL_ITEM = "For grilling small meats.",
-        QUAGMIRE_OVEN = "It needs ingredients to make the science work.",
+        QUAGMIRE_OVEN = "It needs ingredients to work.",
         QUAGMIRE_OVEN_ITEM = "For scientifically burning things.",
         QUAGMIRE_CASSEROLEDISH = "A dish for all seasonings.",
         QUAGMIRE_CASSEROLEDISH_SMALL = "For making minuscule motleys.",
@@ -2628,7 +2628,7 @@ return {
         QUAGMIRE_BOWL_SILVER = "A bright bowl.",
         QUAGMIRE_CRATE = "Kitchen stuff.",
         
-        QUAGMIRE_MERM_CART1 = "Any science in there?", --sammy's wagon
+        QUAGMIRE_MERM_CART1 = "Anything in there?", --sammy's wagon
         QUAGMIRE_MERM_CART2 = "I could use some stuff.", --pipton's cart
         QUAGMIRE_PARK_ANGEL = "Take that, creature!",
         QUAGMIRE_PARK_ANGEL2 = "So lifelike.",
@@ -2654,8 +2654,8 @@ return {
         },
         QUAGMIRE_LAMP_POST = "Huh. Reminds me of home.",
 
-        QUAGMIRE_BEEFALO = "Science says it should have died by now.",
-        QUAGMIRE_SLAUGHTERTOOL = "Laboratory tools for surgical butchery.",
+        QUAGMIRE_BEEFALO = "It should have died by now.",
+        QUAGMIRE_SLAUGHTERTOOL = "Is this a twisted joke?!",
 
         QUAGMIRE_SAPLING = "I can't get anything else out of that.",
         QUAGMIRE_BERRYBUSH = "Those berries are all gone.",
@@ -2663,7 +2663,7 @@ return {
         QUAGMIRE_ALTAR_STATUE2 = "A statue eroding away.",
         QUAGMIRE_ALTAR_QUEEN = "A monumental monument.",
         QUAGMIRE_ALTAR_BOLLARD = "As far as posts go, this one is adequate.",
-        QUAGMIRE_ALTAR_IVY = "Kind of clingy.",
+        QUAGMIRE_ALTAR_IVY = "The vines cling to it",
 
         QUAGMIRE_LAMP_SHORT = "Enlightening.",
 
@@ -2671,14 +2671,14 @@ return {
         WINONA_CATAPULT = 
         {
         	GENERIC = "She's made a sort of automatic defense system.",
-        	OFF = "It needs some electricity.",
+        	OFF = "It could use powering.",
         	BURNING = "It's on fire!",
         	BURNT = "Science couldn't save it.",
         },
         WINONA_SPOTLIGHT = 
         {
         	GENERIC = "What an ingenious idea!",
-        	OFF = "It needs some electricity.",
+        	OFF = "It could use powering.",
         	BURNING = "It's on fire!",
         	BURNT = "Science couldn't save it.",
         },
@@ -2729,8 +2729,8 @@ return {
         {
             BURNING = "The tree is burning!",
             BURNT = "The tree burned down.",
-            CHOPPED = "That was a pretty thick tree.",
-            GENERIC = "I didn't know trees grew on the moon.",
+            CHOPPED = "Chop every last one of them!",
+            GENERIC = "What kind of tree is this?",
         },
 		MOON_TREE_BLOSSOM = "It fell from the moon tree.",
 
@@ -2751,38 +2751,38 @@ return {
 			WITHERED = "It's pretty hot out.",
 			GENERIC = "It's a bush... from the moon!",
 			PICKED = "It'll take awhile to grow more fruit.",
-			DISEASED = "It looks pretty sick.",
-            DISEASING = "Err, something's not right.",
+			DISEASED = "It looks ill.",
+            DISEASING = "Something's not right.",
 			BURNING = "It's burning!",
 		},
         DEAD_SEA_BONES = "Washed up on land.",
         HOTSPRING = 
         {
         	GENERIC = "If only I could soak my weary bones.",
-        	BOMBED = "Just a simple chemical reaction.",
-        	GLASS = "Water turns to glass under the moon. That's just science.",
+        	BOMBED = "It's been set ablaze.",
+        	GLASS = "It's turned into glass.",
 			EMPTY = "I'll just have to wait for it to fill up again.",
         },
         MOONGLASS = "It's very sharp.",
-        MOONGLASS_ROCK = "I can practically see my reflection in it.",
-        BATHBOMB = "It's just textbook chemistry.",
+        MOONGLASS_ROCK = "I can see my reflection in it.",
+        BATHBOMB = "It can be set ablaze.",
         TRAP_STARFISH =
         {
-            GENERIC = "A harmless looking starfish.",
-            CLOSED = "It tried to chomp me!",
+            GENERIC = "An oversized starfish.",
+            CLOSED = "It bites!",
         },
         DUG_TRAP_STARFISH = "It's not fooling anyone now.",
         SPIDER_MOON = 
         {
-        	GENERIC = "Oh good. The moon mutated it.",
-        	SLEEPING = "Thank Sothis, it stopped moving.",
-        	DEAD = "Is it really dead?",
+        	GENERIC = "It's transformed.",
+        	SLEEPING = "An opportunity to strike.",
+        	DEAD = "See you in the eternal flames.",
         },
         MOONSPIDERDEN = "That's not a normal spider den.",
 		FRUITDRAGON =
 		{
-			GENERIC = "It's not ripe yet.",
-			RIPE = "I think it's ripe now.",
+			GENERIC = "What a curious creature.",
+			RIPE = "Ripe like a fruit.",
 			SLEEPING = "It rests.",
 		},
         PUFFIN =
@@ -2828,22 +2828,22 @@ return {
             GENERIC = "I think tanks are in order.",
             BURNT = "Lost to sea.",
         },
-        BOAT_ITEM = "It would be nice to do some experiments on the water.",
+        BOAT_ITEM = "For sailing the seas.",
         STEERINGWHEEL_ITEM = "That's going to be the steering wheel.",
         ANCHOR_ITEM = "Now I can build an anchor.",
         MAST_ITEM = "Now I can build a mast.",
         MUTATEDHOUND = 
         {
-        	DEAD = "Now I can breathe easy.",
-        	GENERIC = "Science save us!",
-        	SLEEPING = "I have a very strong desire to run.",
+        	DEAD = "See you in the eternal flames.",
+        	GENERIC = "Is this some kind of twisted joke?!",
+        	SLEEPING = "Kill every last one of them!",
         },
 
         MUTATED_PENGUIN = 
         {
 			DEAD = "Eventually, I too will fall.",
-			GENERIC = "It's aggressive.",
-			SLEEPING = "Thank goodness. It's sleeping.",
+			GENERIC = "Is this some kind of twisted joke?!",
+			SLEEPING = "Kill every last one of them!",
 		},
         CARRAT = 
         {
@@ -2882,8 +2882,8 @@ return {
         MALBATROSS_FEATHER = "Plucked from a fine feathered fiend.",
         MALBATROSS_BEAK = "Smells fishy.",
         MAST_MALBATROSS_ITEM = "It's lighter than it looks.",
-        MAST_MALBATROSS = "Spread my wings and sail away!",
-		MALBATROSS_FEATHERED_WEAVE = "I'm making a quill-t!",
+        MAST_MALBATROSS = "This will improve our sailing.",
+		MALBATROSS_FEATHERED_WEAVE = "A feathery weave.",
 
         WALKINGPLANK = "Couldn't we have just made a lifeboat?",
         OAR = "Use this to paddle.",
@@ -2918,13 +2918,13 @@ return {
         MONSTERTARTARE = "There's got to be something else to eat around here.",
         FRESHFRUITCREPES = "A fruity meal.",
         FROGFISHBOWL = "Is that just... frogs stuffed inside a fish?",
-        POTATOTORNADO = "Potato, scientifically infused with the power of a tornado!",
+        POTATOTORNADO = "Potato, blessed with wind magic?",
         DRAGONCHILISALAD = "I can taste the flavor.",
         GLOWBERRYMOUSSE = "The sign of an experienced cook.",
         VOLTGOATJELLY = "It's shockingly delicious.",
         NIGHTMAREPIE = "It's a little unsettling.",
         BONESOUP = "It looks different from Daphnel stew.",
-        MASHEDPOTATOES = "I've heard cooking is basically chemistry. I should try it.",
+        MASHEDPOTATOES = "I stirred it too hard.",
         POTATOSOUFFLE = "I forgot what good food tasted like.",
         MOQUECA = "The sign of an experienced cook.",
         GAZPACHO = "The sign of an experienced cook.",

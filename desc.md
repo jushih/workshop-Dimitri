@@ -4,13 +4,13 @@ Dimitri Alexandre Blaiddyd from Fire Emblem Three Houses. The exiled prince of t
 Health: 150
 Hunger: 150
 Sanity: 100
-- Dimitri lacks a sense of taste and [strike]can eat weeds[/strike] doesn't gain or lose sanity from eating food
+- Dimitri lacks a sense of taste and doesn't gain or lose sanity from eating food
 - Starts with his lance Areadbhar and his fur cape
 - Bad at sewing, repairs items slower and uses up sewing kit faster
 - Gets cold less easily, but finds hot temperatures unbearable
 
 [h1]Crest of Blaiddyd[/h1]
-Said to be a blessing from the Goddess, Dimitri's Crest grants him strength and allows him to wield Areadbhar.
+Dimitri's Crest grants him strength and allows him to wield Areadbhar.
 - 1.5x damage multiplier 
 - Weapon durability goes down twice as fast  
 - Low chance of Crest activating in combat and dealing critical damage
@@ -20,7 +20,7 @@ Said to be a blessing from the Goddess, Dimitri's Crest grants him strength and 
 
 [h1]Areadbhar[/h1] 
 A Hero's Relic carved out of bone whose power can only be harnessed by one who bears the Crest of Blaiddyd. 
-- Deals 100 base damage
+- Deals 80 base damage
 - Has 20 uses (blame FE mechanics)
 - When broken, the weapon drops a Crest Stone and bone shards. Be sure to collect the Crest Stone which is required to repair Areadbhar.
 - Areadbhar can be repaired using 1x Crest Stone and 6x Bone Shards 

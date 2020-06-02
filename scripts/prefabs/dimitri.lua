@@ -113,9 +113,9 @@ local master_postinit = function(inst)
 	
 	-- Heats up faster and gets cold slower
 	--inst.components.temperature.inherentinsulation = 60
-	--inst.components.temperature.inherentsummerinsulation = -45
+	inst.components.temperature.inherentsummerinsulation = -30
 	inst.components.temperature.inherentinsulation = TUNING.INSULATION_TINY
-    inst.components.temperature.inherentsummerinsulation = -TUNING.INSULATION_TINY	
+    --inst.components.temperature.inherentsummerinsulation = -TUNING.INSULATION_TINY	
 	
 	-- No sanity gain or penalty from food --------------------
 	
