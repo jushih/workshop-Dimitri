@@ -128,7 +128,11 @@ local master_postinit = function(inst)
 		-- save original food value to reset later
 		edible_comp.originalsanityvalue = edible_comp.sanityvalue
 		-- change sanity value to zero
-		edible_comp.sanityvalue = 0
+		-- edible_comp.sanityvalue = 0
+		
+		-- instead of setting sanity to zero, half sanity loss and gain
+		edible_comp.sanityvalue = edible_comp.sanityvalue*0.5
+		
 	end
 	
 		-- Call the original Eat function and save the result in a variable.
@@ -145,6 +149,8 @@ local master_postinit = function(inst)
 	-- Then we return the value returned by the original Eat function.
 	return returnvalue
 	end
+
+
 
 	-- Crit chance ---------------------------
 	inst:ListenForEvent("onattackother", function(inst, data)

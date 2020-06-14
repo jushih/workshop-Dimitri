@@ -71,6 +71,14 @@ STRINGS.CHARACTER_NAMES.dimitri = "Dimitri"
 STRINGS.CHARACTER_DESCRIPTIONS.dimitri = "*Crest of Blaiddyd grants him strength.\n*Breaks things easily.\n*Lacks a sense of taste."
 STRINGS.CHARACTER_QUOTES.dimitri = "\"The dead demand justice.\""
 STRINGS.CHARACTER_SURVIVABILITY.dimitri = "Depends on the route."
+TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.DIMITRI = {"dimitricape","areadbhar",}
+local mymodstartingitems = {--you'll need to make a local table of your items inventoryimage atlas
+	dimitricape = {atlas = "images/inventoryimages/dimitricape.xml"},
+	areadbhar = {atlas = "images/inventoryimages/areadbhar.xml"},
+}
+TUNING.STARTING_ITEM_IMAGE_OVERRIDE = type(TUNING.STARTING_ITEM_IMAGE_OVERRIDE) == "table" and GLOBAL.MergeMaps(TUNING.STARTING_ITEM_IMAGE_OVERRIDE, mymodstartingitems) or mymodstartingitems
+
+
 
 -- Custom speech strings
 STRINGS.CHARACTERS.DIMITRI = require "speech_dimitri"
@@ -211,6 +219,24 @@ AddComponentPostInit("sewing", function(self)
 		end
 	end
 end)
+
+
+-- loses sanity around Edelgard
+local function CalcSanityAura(inst, observer)
+    if observer.prefab == "edelgard" then
+        return -TUNING.SANITYAURA_MED
+	elseif observer.prefab == "ghost" then
+		return -TUNING.SANITYAURA_HUGE
+	else
+		return 0
+	end
+end
+function AddSanityAura(inst)
+    inst:AddComponent("sanityaura")
+	inst.components.sanityaura.aurafn = CalcSanityAura
+end
+AddPrefabPostInit("edelgard", AddSanityAura)
+AddPrefabPostInit("ghost", AddSanityAura)
 
 
 -- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.

@@ -546,6 +546,17 @@ return {
             GHOST = "What must I do to be rid of you?!",
             FIRESTARTER = "Cease this at once!",
         },
+
+        EDELGARD =
+        {
+            GENERIC = "Cut a path to your future. I will rise to meet you there.",
+            ATTACKER = "I'll take that head from your shoulders and hang it from the gates of Enbarr!",
+            MURDERER = "You...monster!",
+            REVIVER = "Is this some kind of twisted joke?!",
+            GHOST = "Haunt me if you wish. You can join the chorus of voices that rightfully scorn me.",
+            FIRESTARTER = "Must you continue your senseless destruction?!",
+        },
+        
         WILSON =
         {
             GENERIC = "Greetings.",
