@@ -1,19 +1,17 @@
 local assets =
 {
+	Asset("ANIM", "anim/dimitricape_ground.zip"),
 	Asset("ANIM", "anim/dimitricape.zip"),
-	Asset("ANIM", "anim/swap_dimitricape.zip"),
     Asset("ATLAS", "images/inventoryimages/dimitricape.xml"),
     Asset("IMAGE", "images/inventoryimages/dimitricape.tex"),
 }
 
 local function onequip(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_body", "swap_dimitricape", "backpack")
-    owner.AnimState:OverrideSymbol("swap_body", "swap_dimitricape", "swap_body")
+    owner.AnimState:OverrideSymbol("swap_body_tall", "dimitricape", "swap_body_tall")
 end
 
 local function onunequip(inst, owner)
-    owner.AnimState:ClearOverrideSymbol("swap_body")
-    owner.AnimState:ClearOverrideSymbol("dimitricape")
+	owner.AnimState:ClearOverrideSymbol("swap_body_tall")
 end
 
 local function fn()
@@ -27,8 +25,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 	
-    inst.AnimState:SetBank("dimitricape")
-    inst.AnimState:SetBuild("dimitricape")
+    inst.AnimState:SetBank("dimitricape_ground")
+    inst.AnimState:SetBuild("dimitricape_ground")
     inst.AnimState:PlayAnimation("idle")
 
     inst.foleysound = "dontstarve/movement/foley/backpack"
@@ -59,7 +57,7 @@ local function fn()
 	inst.components.equippable.dapperness = TUNING.DAPPERNESS_SMALL
 
 	inst:AddComponent("armor")
-    inst.components.armor:InitCondition(1500, TUNING.ARMORGRASS_ABSORPTION )
+    inst.components.armor:InitCondition(1500, 0.7 )
 
     inst:AddTag("needssewing")
     inst:AddTag("sewablearmor")
