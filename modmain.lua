@@ -224,7 +224,7 @@ end)
 -- loses sanity around Edelgard
 local function CalcSanityAura(inst, observer)
     if observer.prefab == "dimitri" then
-        return -TUNING.SANITYAURA_MED
+        return -TUNING.SANITYAURA_SMALL
 	else
 		return 0
 	end

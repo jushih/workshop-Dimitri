@@ -55,6 +55,11 @@ local function OnEquip(inst, data)
 	if data.item ~= nil and data.item.prefab == "armormarble" then
 		data.item.components.equippable.walkspeedmult = 1
 	end
+
+	if data.item ~= nil and data.item.prefab == "armored_lord" then
+		data.item.components.equippable.walkspeedmult = 1
+	end
+	
 end
 
 -- When the character is revived from human
