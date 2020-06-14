@@ -37,6 +37,9 @@ Assets = {
 	Asset( "IMAGE", "images/names_dimitri.tex" ),
 	Asset( "ATLAS", "images/names_dimitri.xml" ),
 	
+	Asset( "IMAGE", "images/names_gold_dimitri.tex" ),
+    Asset( "ATLAS", "images/names_gold_dimitri.xml" ),
+	
 	Asset( "IMAGE", "images/inventoryimages/areadbhar.tex" ),
 	Asset( "ATLAS", "images/inventoryimages/areadbhar.xml"),
 	
