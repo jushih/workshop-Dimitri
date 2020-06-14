@@ -102,7 +102,7 @@ STRINGS.CHARACTERS.DIMITRI.DESCRIBE.AREADBHAR_REFINED = "With this I shall aveng
 STRINGS.CHARACTERS.DIMITRI.DESCRIBE.AREADBHAR = "A stone with an engraving."
 STRINGS.CHARACTERS.DIMITRI.DESCRIBE.CRESTSTONE = "A stone engraved with the Crest of Blaiddyd."
 
-TUNING.DIMITRI_HEALTH = 150
+TUNING.DIMITRI_HEALTH = 200
 TUNING.DIMITRI_HUNGER = 150
 TUNING.DIMITRI_SANITY = 100
 
@@ -223,10 +223,8 @@ end)
 
 -- loses sanity around Edelgard
 local function CalcSanityAura(inst, observer)
-    if observer.prefab == "edelgard" then
+    if observer.prefab == "dimitri" then
         return -TUNING.SANITYAURA_MED
-	elseif observer.prefab == "ghost" then
-		return -TUNING.SANITYAURA_HUGE
 	else
 		return 0
 	end
