@@ -62,6 +62,137 @@ local function OnEquip(inst, data)
 	
 end
 
+local function GetExp(inst)
+	if TUNING.LEVELUP == 0 then return end
+	
+	inst.maxlevel = TUNING.DIMITRI_LEVEL_MAX
+
+	
+	local MAX_EXP = TUNING.DIMITRI_EXP_MAX*inst.Level
+
+	--If level is 0. 10 exp is all that is needed to level up
+	if inst.Level == 0 then
+		MAX_EXP = 10
+	end
+	
+	local levelup = false
+	
+	local currentlvl = inst.Level
+	
+	--lvl up
+	if inst.Level < inst.maxlevel then	
+		while inst.Exp >= MAX_EXP do
+			inst.Exp = inst.Exp - MAX_EXP
+			inst.Level = inst.Level + 1
+			levelup = true
+			MAX_EXP = TUNING.DIMITRI_EXP_MAX*inst.Level
+		end
+	elseif inst.Level > inst.maxlevel then
+		inst.Level= inst.maxlevel
+		
+	elseif inst.Level == inst.maxlevel then
+		inst.Exp = 0
+	end
+	
+	local lvlup = inst.Level- currentlvl
+	
+	if levelup == true and TUNING.DIMITRI_STAT_UP_TYPE == "Random" then
+		local speed = 1/10
+		local damagemultiplier = 1/100
+	
+		for i = 1, lvlup, 1 do  
+			inst.increasehealth = math.random(0,6)
+			inst.increasehunger = math.random(0,4)
+			inst.increasesanity = math.random(0,4)
+			inst.increasespeed = math.random(0,2)*speed
+			inst.increasedamage = math.random(0,4)*damagemultiplier
+			
+		
+			inst.maxhealth = inst.maxhealth +  inst.increasehealth
+			inst.maxhunger = inst.maxhunger + inst.increasehunger
+			inst.maxsanity = inst.maxsanity + inst.increasesanity
+			inst.currentwalkspeed = inst.currentwalkspeed + inst.increasespeed 
+			inst.currentrunspeed = inst.currentrunspeed + inst.increasespeed 
+			inst.damagemultiplier = inst.damagemultiplier + inst.increasedamage
+			
+	
+		end
+		local hunger_percent = inst.components.hunger:GetPercent()
+		local health_percent = inst.components.health:GetPercent()
+		local sanity_percent = inst.components.sanity:GetPercent()
+		inst.components.health.maxhealth = math.ceil (inst.maxhealth)		
+		inst.components.hunger.max = math.ceil (inst.maxhunger)			
+		inst.components.sanity.max = math.ceil (inst.maxsanity)			
+		inst.components.locomotor.walkspeed = math.ceil (inst.currentwalkspeed)	
+		inst.components.locomotor.runspeed = math.ceil (inst.currentrunspeed)	
+		inst.components.hunger:SetPercent(hunger_percent)
+		inst.components.health:SetPercent(health_percent)
+		inst.components.sanity:SetPercent(sanity_percent)
+		inst.components.combat.damagemultiplier = inst.damagemultiplier
+		
+		
+		inst.weightedstatchange = inst.increasehealth/3 + inst.increasehunger/2 + inst.increasesanity/2 + inst.increasespeed*10 + inst.increasedamage*100
+		print(inst.increasehealth/3)
+		print(inst.increasehunger/2)		
+		print(inst.increasesanity/2)		
+		print(inst.increasespeed*10)		
+		print(inst.increasedamage*100)
+		print(inst.weightedstatchange)
+		
+		
+		if inst.weightedstatchange > 5 then
+			inst.components.talker:Say("With each kill, more monstrous...")
+		elseif inst.weightedstatchange < 3 then
+			inst.components.talker:Say("It's not enough to beat her!")
+		else
+			inst.components.talker:Say("My strength is in the service of revenge.")
+		end
+		
+
+	end
+
+end
+
+
+
+--check if victim is valid
+local function IsValidVictim(victim)
+    return victim ~= nil
+        and not ((victim:HasTag("prey") and not victim:HasTag("hostile")) or
+                victim:HasTag("veggie") or
+                victim:HasTag("structure") or
+                victim:HasTag("wall") or
+                victim:HasTag("companion") or
+				victim:HasTag("birchnutdrake"))
+        and victim.components.health ~= nil
+        and victim.components.combat ~= nil
+end
+
+--on kill decide exp gained
+local function OnKill(inst, data)
+
+    local victim = data.victim
+    if IsValidVictim(victim) then
+
+		if victim:HasTag("epic") then
+			inst.Exp = inst.Exp + 2000
+		elseif victim:HasTag("nightmarecreature") or victim:HasTag("character") then
+			inst.Exp = inst.Exp + 20
+		elseif victim:HasTag("worm") or victim:HasTag("WORM_DANGER") then
+			inst.Exp = inst.Exp + 20
+		elseif victim:HasTag("shadowchesspiece") or victim:HasTag("tentacle_pillar") then
+			inst.Exp = inst.Exp + 30
+		elseif victim:HasTag("largecreature") or victim:HasTag("mossling") then
+			inst.Exp = inst.Exp + 20
+		elseif victim:HasTag("monster") or victim:HasTag("merm") then
+			inst.Exp = inst.Exp + 10
+		else
+			inst.Exp = inst.Exp + 1
+		end
+		GetExp(inst)
+	end
+end
+
 -- When the character is revived from human
 local function onbecamehuman(inst)
 	-- Set speed when not a ghost (optional)
@@ -83,10 +214,68 @@ local function onload(inst)
     else
         onbecamehuman(inst)
     end
+end
+
+local function onpreload(inst, data)
+	if data ~= nil then
+		if data.Level then
+			inst.Level = data.Level
+			GetExp(inst)
+			
+			if data.health and data.health.health then  inst.components.health.currenthealth = data.health.health end
+			if data.hunger and data.hunger.hunger then  inst.components.hunger.current = data.hunger.hunger end
+			if data.sanity and data.sanity.current then inst.components.sanity.current = data.sanity.current end
+			inst.components.health:DoDelta(0)
+			inst.components.hunger:DoDelta(0)
+			inst.components.sanity:DoDelta(0)
+			
+		end
+		if data.Exp then
+			inst.Exp = data.Exp
+			GetExp(inst)
+		end
+		if data.maxhealth then
+			inst.maxhealth = data.maxhealth
+		end
+		if data.maxhunger then
+			inst.maxhunger = data.maxhunger
+		end
+		if data.maxsanity then  
+			inst.maxsanity = data.maxsanity
+		end
+		if data.currentwalkspeed then
+			inst.currentwalkspeed = data.currentwalkspeed
+		end
+		if data.currentrunspeed then
+			inst.currentrunspeed = data.currentrunspeed
+		end
+		if data.damagemultiplier then
+			inst.damagemultiplier = data.damagemultiplier
+		end
+		if TUNING.DIMITRI_LEVELUP == 1 then
+			inst.components.health.maxhealth = math.ceil (inst.maxhealth)		
+			inst.components.hunger.max = math.ceil (inst.maxhunger)			
+			inst.components.sanity.max = math.ceil (inst.maxsanity)			
+			inst.components.locomotor.walkspeed = math.ceil (inst.currentwalkspeed)	
+			inst.components.locomotor.runspeed = math.ceil (inst.currentrunspeed)	
+			inst.components.combat.damagemultiplier = inst.damagemultiplier
+		end
 	
+	end
 	
 end
 
+--save lvl data
+local function onsave(inst, data)
+	data.Level = inst.Level
+	data.Exp = inst.Exp
+	data.maxhealth  = inst.maxhealth 
+	data.maxhunger = inst.maxhunger 
+	data.maxsanity = inst.maxsanity 
+	data.currentwalkspeed = inst.currentwalkspeed 
+	data.currentrunspeed = inst.currentrunspeed 
+	data.damagemultiplier = inst.damagemultiplier
+end
 
 -- This initializes for both the server and client. Tags can be added here.
 local common_postinit = function(inst) 
@@ -95,6 +284,22 @@ local common_postinit = function(inst)
 
 	-- Minimap icon
 	inst.MiniMapEntity:SetIcon( "dimitri.tex" )
+
+	--level up info
+	inst.Level = TUNING.DIMITRI_LEVEL_START
+	inst.Exp = 0
+	inst.maxhealth = TUNING.DIMITRI_HEALTH 
+	inst.maxhunger = TUNING.DIMITRI_HUNGER 
+	inst.maxsanity = TUNING.DIMITRI_SANITY
+	inst.currentwalkspeed = TUNING.DIMITRI_WALKSPEED
+	inst.currentrunspeed  = TUNING.DIMITRI_RUNSPEED
+	inst.damagemultiplier = TUNING.DIMITRI_DAMAGE_MULTIPLIER
+
+	--stat info
+	inst:AddComponent("keyhandler")
+	inst.components.keyhandler:AddActionListener("dimitri", TUNING.DIMITRI.KEY, "INFO")
+	inst.components.keyhandler:AddActionListener("dimitri", TUNING.DIMITRI.KEY2, "STATS")
+
 end
 
 -- This initializes for the server only. Components are added here.
@@ -103,13 +308,28 @@ local master_postinit = function(inst)
 	inst.soundsname = "wilson"
 	
 	-- Stats	
-	inst.components.health:SetMaxHealth(200)
-	inst.components.hunger:SetMax(150)
-	inst.components.sanity:SetMax(100)
-	
+	inst.components.health:SetMaxHealth(TUNING.DIMITRI_HEALTH)
+	inst.components.hunger:SetMax(TUNING.DIMITRI_HUNGER)
+	inst.components.sanity:SetMax(TUNING.DIMITRI_SANITY)
+	--Runspeed
+	inst.components.locomotor.walkspeed = math.ceil (TUNING.DIMITRI_WALKSPEED)	
+	inst.components.locomotor.runspeed = math.ceil (TUNING.DIMITRI_RUNSPEED)
 	-- Damage multiplier 
-    inst.components.combat.damagemultiplier = 1.5
+	inst.components.combat.damagemultiplier = inst.damagemultiplier
 	
+
+	--level up info
+	inst.Level = TUNING.DIMITRI_LEVEL_START
+	inst.Exp = 0
+	inst.maxhealth = TUNING.DIMITRI_HEALTH 
+	inst.maxhunger = TUNING.DIMITRI_HUNGER 
+	inst.maxsanity = TUNING.DIMITRI_SANITY
+	inst.currentwalkspeed = TUNING.DIMITRI_WALKSPEED 
+	inst.currentrunspeed  = TUNING.DIMITRI_RUNSPEED 
+	inst.damagemultiplier = TUNING.DIMITRI_DAMAGE_MULTIPLIER
+	inst:ListenForEvent("killed", OnKill)
+
+
 	-- Hunger rate 
 	inst.components.hunger.hungerrate = 1 * TUNING.WILSON_HUNGER_RATE
 	
@@ -210,7 +430,7 @@ local master_postinit = function(inst)
 			end
 			
 			print(handslot.prefab)
-			if data.weapon ~= nil and handslot.prefab ~= nil and handslot.prefab == "hambat" then
+			if data.weapon ~= nil and handslot.prefab ~= nil and handslot.prefab == "hambat" and inst.Level < 20 then
 				if math.random() < slipChance then
 					print("slip")
 
@@ -287,7 +507,8 @@ local master_postinit = function(inst)
 	
 	end	
 
-
+	inst.OnSave = onsave
+	inst.OnPreLoad = onpreload
 	
 
 end

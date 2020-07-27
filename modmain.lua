@@ -1,3 +1,4 @@
+
 PrefabFiles = {
 	"dimitri",
 	"dimitri_none",
@@ -104,10 +105,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.AREADBHAR_REFINED = "A jagged lance carved o
 STRINGS.CHARACTERS.DIMITRI.DESCRIBE.AREADBHAR_REFINED = "With this I shall avenge the fallen."
 STRINGS.CHARACTERS.DIMITRI.DESCRIBE.AREADBHAR = "A stone with an engraving."
 STRINGS.CHARACTERS.DIMITRI.DESCRIBE.CRESTSTONE = "A stone engraved with the Crest of Blaiddyd."
-
-TUNING.DIMITRI_HEALTH = 200
-TUNING.DIMITRI_HUNGER = 150
-TUNING.DIMITRI_SANITY = 100
 
 
 --TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.DIMITRI = { "areadbhar", "dimitricape" }
@@ -268,5 +265,83 @@ STRINGS.RECIPE_DESC.AREADBHAR_REFINED = "Areadbhar refined with greater strength
 STRINGS.RECIPE_DESC.DIMITRICAPE = "Weathers the frigid lands of Faerghus." 
 STRINGS.RECIPE_DESC.DIMITRICAPE_REFINED = "Lined with fur to weather any frost." 
 
+TUNING.DIMITRI = {}
+TUNING.DIMITRI.KEY = GetModConfigData("dimitri_level_key") or 107 
+TUNING.DIMITRI.KEY2 = GetModConfigData("dimitri_stats_key") or 114 
 
+TUNING.DIMITRI_LEVEL_START = 0
+TUNING.DIMITRI_LEVEL_TWENTY = 20
+TUNING.DIMITRI_LEVEL_MAX = 50
+TUNING.DIMITRI_EXP_MAX = 100
+TUNING.DIMITRI_LEVELUP = 1
+TUNING.DIMITRI_STAT_UP_TYPE = "Random"
 
+TUNING.DIMITRI_HEALTH = 200
+TUNING.DIMITRI_HUNGER = 150
+TUNING.DIMITRI_SANITY = 100
+TUNING.DIMITRI_WALKSPEED = 6
+TUNING.DIMITRI_RUNSPEED = 8
+TUNING.DIMITRI_DAMAGE_MULTIPLIER = 1.5
+
+--aim for 350 health, 250 hunger, 200 sanity,
+--10 WALKSPEED, 2.5 DAMAGE_MULTIPLIER at max. 
+
+--Exp info keypress
+local function INFO(inst)
+	inst.writing = false
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local ents = TheSim:FindEntities(x,y,z, 1, {"_writeable"})
+	for k,v in pairs(ents) do
+		inst.writing = true
+	end 
+	
+	if not inst.writing then
+		local TheInput = TheInput
+		
+		inst.keep_check = false			
+		if not inst.keep_check then		
+			inst.keep_check = true	
+			inst.components.talker:Say("[Current Lvl ".." : "..(inst.Level).." / "..(TUNING.DIMITRI_LEVEL_MAX).." ]\n[ Current EXP".." : "..(inst.Exp).." / "..(TUNING.DIMITRI_EXP_MAX*inst.Level).." ]\n ")
+		elseif inst.keep_check then		
+			inst.keep_check = false	
+		end
+		inst:DoTaskInTime( 0.5, function()
+			if inst.keep_check then
+				inst.keep_check = false
+			end 
+		end)
+		----inst.components.talker.colour = Vector3(0.7, 0.85, 1, 1)
+	end
+	
+end
+AddModRPCHandler("dimitri", "INFO", INFO)
+
+local function STATS(inst)
+	inst.writing = false
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local ents = TheSim:FindEntities(x,y,z, 1, {"_writeable"})
+	for k,v in pairs(ents) do
+		inst.writing = true
+	end 
+	
+	if not inst.writing then
+		local TheInput = TheInput
+		
+		inst.keep_check = false			
+		if not inst.keep_check then		
+			inst.keep_check = true	
+			inst.components.talker:Say("[Gained Hunger".." : "..(inst.maxhunger-TUNING.DIMITRI_HUNGER).."] \n[ Gained Sanity ".." : "..(inst.maxsanity-TUNING.DIMITRI_SANITY).."]\n [Gained Health".." : "..(inst.maxhealth-TUNING.DIMITRI_HEALTH).."] \n[ Current Speed  ".." : "..(inst.currentwalkspeed).."] \n[ Current Damage Multiplier ".." : "..(inst.damagemultiplier).."]")
+			--inst.sg:AddStateTag("notalking")
+		elseif inst.keep_check then		
+			inst.keep_check = false	
+		end
+		inst:DoTaskInTime( 0.5, function()
+			if inst.keep_check then
+				inst.keep_check = false
+			end 
+		end)
+		----inst.components.talker.colour = Vector3(0.7, 0.85, 1, 1)
+	end
+	
+end
+AddModRPCHandler("dimitri", "STATS", STATS)
